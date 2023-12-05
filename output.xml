@@ -1,0 +1,3866 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.11.7 on win32)" generated="20231205 15:31:12.992" rpa="true" schemaversion="4">
+<suite id="s1" name="Tasks" source="c:\Users\zcheveste\Desktop\robot_estacionamiento\devengadoestacionamiento\tasks.robot">
+<test id="s1-t1" name="Open Major desktop application and play a app" line="34">
+<kw name="Creacion de Carpetas">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${diccionario}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20231205 15:31:14.442" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001E245ACFBD0&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:14.422" endtime="20231205 15:31:14.444"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${descargas}</var>
+<arg>2</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.446" level="INFO">${descargas} = C:\\Users\\zcheveste\\Documents</msg>
+<status status="PASS" starttime="20231205 15:31:14.444" endtime="20231205 15:31:14.446"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_hoy}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20231205 15:31:14.447" level="INFO">${fecha_hoy} = 2023-12-05 15:31:14.447</msg>
+<status status="PASS" starttime="20231205 15:31:14.447" endtime="20231205 15:31:14.448"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${año}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20231205 15:31:14.455" level="INFO">${año} = 2023</msg>
+<status status="PASS" starttime="20231205 15:31:14.448" endtime="20231205 15:31:14.456"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${mes}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%m</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20231205 15:31:14.457" level="INFO">${mes} = 12</msg>
+<status status="PASS" starttime="20231205 15:31:14.456" endtime="20231205 15:31:14.458"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${día}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%d</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20231205 15:31:14.459" level="INFO">${día} = 05</msg>
+<status status="PASS" starttime="20231205 15:31:14.458" endtime="20231205 15:31:14.460"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_año}</var>
+<arg>${descargas}\\${año}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.461" level="INFO">${ruta_año} = C:\\Users\\zcheveste\\Documents\2023</msg>
+<status status="PASS" starttime="20231205 15:31:14.460" endtime="20231205 15:31:14.461"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_mes}</var>
+<arg>${ruta_año}\\${mes}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.463" level="INFO">${ruta_mes} = C:\\Users\\zcheveste\\Documents\2023\12</msg>
+<status status="PASS" starttime="20231205 15:31:14.462" endtime="20231205 15:31:14.463"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_dia}</var>
+<arg>${ruta_mes}\\${día}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.464" level="INFO">${ruta_dia} = C:\\Users\\zcheveste\\Documents\2023\12\05</msg>
+<status status="PASS" starttime="20231205 15:31:14.463" endtime="20231205 15:31:14.464"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_carpeta}</var>
+<arg>${ruta_dia}\\${nombre_carpeta}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.466" level="INFO">${ruta_carpeta} = C:\\Users\\zcheveste\\Documents\2023\12\05\DevengadosPdfEstacionamiento</msg>
+<status status="PASS" starttime="20231205 15:31:14.465" endtime="20231205 15:31:14.466"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${existe_carpeta_año}</var>
+<arg>Directory Should Exist</arg>
+<arg>${ruta_año}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Directory Should Exist" library="OperatingSystem">
+<arg>${ruta_año}</arg>
+<doc>Fails unless the given path points to an existing directory.</doc>
+<msg timestamp="20231205 15:31:14.468" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\zcheveste\Documents\2023"&gt;C:\Users\zcheveste\Documents\2023&lt;/a&gt;' exists.</msg>
+<status status="PASS" starttime="20231205 15:31:14.468" endtime="20231205 15:31:14.469"/>
+</kw>
+<msg timestamp="20231205 15:31:14.469" level="INFO">${existe_carpeta_año} = True</msg>
+<status status="PASS" starttime="20231205 15:31:14.467" endtime="20231205 15:31:14.470"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${existe_carpeta_año}</arg>
+<arg>Create Directory</arg>
+<arg>${ruta_año}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20231205 15:31:14.470" endtime="20231205 15:31:14.471"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${existe_carpeta_mes}</var>
+<arg>Directory Should Exist</arg>
+<arg>${ruta_mes}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Directory Should Exist" library="OperatingSystem">
+<arg>${ruta_mes}</arg>
+<doc>Fails unless the given path points to an existing directory.</doc>
+<msg timestamp="20231205 15:31:14.473" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\zcheveste\Documents\2023\12"&gt;C:\Users\zcheveste\Documents\2023\12&lt;/a&gt;' exists.</msg>
+<status status="PASS" starttime="20231205 15:31:14.472" endtime="20231205 15:31:14.474"/>
+</kw>
+<msg timestamp="20231205 15:31:14.474" level="INFO">${existe_carpeta_mes} = True</msg>
+<status status="PASS" starttime="20231205 15:31:14.472" endtime="20231205 15:31:14.474"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${existe_carpeta_mes}</arg>
+<arg>Create Directory</arg>
+<arg>${ruta_mes}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20231205 15:31:14.475" endtime="20231205 15:31:14.476"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${existe_carpeta_día}</var>
+<arg>Directory Should Exist</arg>
+<arg>${ruta_dia}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Directory Should Exist" library="OperatingSystem">
+<arg>${ruta_dia}</arg>
+<doc>Fails unless the given path points to an existing directory.</doc>
+<msg timestamp="20231205 15:31:14.478" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\zcheveste\Documents\2023\12\05"&gt;C:\Users\zcheveste\Documents\2023\12\05&lt;/a&gt;' exists.</msg>
+<status status="PASS" starttime="20231205 15:31:14.477" endtime="20231205 15:31:14.478"/>
+</kw>
+<msg timestamp="20231205 15:31:14.479" level="INFO">${existe_carpeta_día} = True</msg>
+<status status="PASS" starttime="20231205 15:31:14.476" endtime="20231205 15:31:14.479"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${existe_carpeta_día}</arg>
+<arg>Create Directory</arg>
+<arg>${ruta_dia}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20231205 15:31:14.479" endtime="20231205 15:31:14.480"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${existe_carpeta_especifica}</var>
+<arg>Directory Should Exist</arg>
+<arg>${ruta_carpeta}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Directory Should Exist" library="OperatingSystem">
+<arg>${ruta_carpeta}</arg>
+<doc>Fails unless the given path points to an existing directory.</doc>
+<msg timestamp="20231205 15:31:14.483" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\zcheveste\Documents\2023\12\05\DevengadosPdfEstacionamiento"&gt;C:\Users\zcheveste\Documents\2023\12\05\DevengadosPdfEstacionamiento&lt;/a&gt;' exists.</msg>
+<status status="PASS" starttime="20231205 15:31:14.481" endtime="20231205 15:31:14.483"/>
+</kw>
+<msg timestamp="20231205 15:31:14.483" level="INFO">${existe_carpeta_especifica} = True</msg>
+<status status="PASS" starttime="20231205 15:31:14.481" endtime="20231205 15:31:14.484"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${existe_carpeta_especifica}</arg>
+<arg>Create Directory</arg>
+<arg>${ruta_carpeta}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20231205 15:31:14.484" endtime="20231205 15:31:14.485"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<msg timestamp="20231205 15:31:14.486" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001E245ACFBD0&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:14.486" endtime="20231205 15:31:14.487"/>
+</kw>
+<status status="PASS" starttime="20231205 15:31:14.420" endtime="20231205 15:31:14.487"/>
+</kw>
+<kw name="Carga de datos">
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${diccionario}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20231205 15:31:14.516" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001E245B26350&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:14.489" endtime="20231205 15:31:14.517"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${descargas}</var>
+<arg>2</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.521" level="INFO">${descargas} = C:\\Users\\zcheveste\\Documents</msg>
+<status status="PASS" starttime="20231205 15:31:14.518" endtime="20231205 15:31:14.521"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${excel_matriz}</var>
+<arg>3</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.525" level="INFO">${excel_matriz} = C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\compromisoestacionamiento\\Excels\\matriz_central.xlsx</msg>
+<status status="PASS" starttime="20231205 15:31:14.522" endtime="20231205 15:31:14.526"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${matriz_hoja}</var>
+<arg>4</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.528" level="INFO">${matriz_hoja} = ESTACIONAMIENTO</msg>
+<status status="PASS" starttime="20231205 15:31:14.526" endtime="20231205 15:31:14.528"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${usuario}</var>
+<arg>5</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.531" level="INFO">${usuario} = KTURKI</msg>
+<status status="PASS" starttime="20231205 15:31:14.529" endtime="20231205 15:31:14.531"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${contraseña}</var>
+<arg>6</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.534" level="INFO">${contraseña} = 37792827</msg>
+<status status="PASS" starttime="20231205 15:31:14.532" endtime="20231205 15:31:14.535"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${excel_factura}</var>
+<arg>7</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.539" level="INFO">${excel_factura} = C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\facturas.xlsx</msg>
+<status status="PASS" starttime="20231205 15:31:14.536" endtime="20231205 15:31:14.540"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${factura_hoja}</var>
+<arg>8</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.543" level="INFO">${factura_hoja} = ESTACIONAMIENTO</msg>
+<status status="PASS" starttime="20231205 15:31:14.541" endtime="20231205 15:31:14.544"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${observacion}</var>
+<arg>9</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.546" level="INFO">${observacion} = COMISION POR SERVICIO DE VENTAS Y COBRANZAS DE CREDITOS PARA EL USO DE ESTACIONAMIENTO INTELIGENTE</msg>
+<status status="PASS" starttime="20231205 15:31:14.544" endtime="20231205 15:31:14.546"/>
+</kw>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${periodo}</var>
+<arg>10</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231205 15:31:14.548" level="INFO">${periodo} = PERIODO 04-11-2023 AL 10-11-2023</msg>
+<status status="PASS" starttime="20231205 15:31:14.546" endtime="20231205 15:31:14.548"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${excel_factura}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20231205 15:31:14.549" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001E245B26350&gt;</msg>
+<msg timestamp="20231205 15:31:14.602" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001E245ACE250&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:14.548" endtime="20231205 15:31:14.603"/>
+</kw>
+<kw name="Read Worksheet As Table" library="RPA.Excel.Files">
+<var>${data_as_table}</var>
+<arg>${factura_hoja}</arg>
+<arg>header=True</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<msg timestamp="20231205 15:31:14.615" level="INFO">Created table: Table(columns=['SERVICIO', 'PROVEEDOR', 'TIPO', 'PROV TIPO', 'NUMERO', 'JURISDICCION', 'CAT.PROG', 'FF', 'OG', 'OFI', 'TIPO FC', 'N FACTURA', 'IMPORTE', 'CANTIDAD', 'ORDEN', 'COMPROMISO', 'COMPROBANTES', 'DEVENGADOS'], rows=20)</msg>
+<msg timestamp="20231205 15:31:14.618" level="INFO">${data_as_table} = Table(columns=['SERVICIO', 'PROVEEDOR', 'TIPO', 'PROV TIPO', 'NUMERO', 'JURISDICCION', 'CAT.PROG', 'FF', 'OG', 'OFI', 'TIPO FC', 'N FACTURA', 'IMPORTE', 'CANTIDAD', 'ORDEN', 'COMPROMISO', 'COMPROBANTE...</msg>
+<status status="PASS" starttime="20231205 15:31:14.604" endtime="20231205 15:31:14.619"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{cuenta}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20231205 15:31:14.620" level="INFO">@{cuenta} = [ ]</msg>
+<status status="PASS" starttime="20231205 15:31:14.619" endtime="20231205 15:31:14.621"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${contadorROW2}</var>
+<arg>2</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.622" level="INFO">${contadorROW2} = 2</msg>
+<status status="PASS" starttime="20231205 15:31:14.621" endtime="20231205 15:31:14.622"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>1</arg>
+<arg>Q</arg>
+<arg>COMPROBANTES</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20231205 15:31:14.623" endtime="20231205 15:31:14.624"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>1</arg>
+<arg>R</arg>
+<arg>DEVENGADOS</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="PASS" starttime="20231205 15:31:14.625" endtime="20231205 15:31:14.626"/>
+</kw>
+<kw name="Read Worksheet As Table" library="RPA.Excel.Files">
+<var>${data_as_table}</var>
+<arg>${factura_hoja}</arg>
+<arg>header=True</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<msg timestamp="20231205 15:31:14.635" level="INFO">Created table: Table(columns=['SERVICIO', 'PROVEEDOR', 'TIPO', 'PROV TIPO', 'NUMERO', 'JURISDICCION', 'CAT.PROG', 'FF', 'OG', 'OFI', 'TIPO FC', 'N FACTURA', 'IMPORTE', 'CANTIDAD', 'ORDEN', 'COMPROMISO', 'COMPROBANTES', 'DEVENGADOS'], rows=20)</msg>
+<msg timestamp="20231205 15:31:14.637" level="INFO">${data_as_table} = Table(columns=['SERVICIO', 'PROVEEDOR', 'TIPO', 'PROV TIPO', 'NUMERO', 'JURISDICCION', 'CAT.PROG', 'FF', 'OG', 'OFI', 'TIPO FC', 'N FACTURA', 'IMPORTE', 'CANTIDAD', 'ORDEN', 'COMPROMISO', 'COMPROBANTE...</msg>
+<status status="PASS" starttime="20231205 15:31:14.627" endtime="20231205 15:31:14.637"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" starttime="20231205 15:31:14.638" endtime="20231205 15:31:14.669"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${excel_comprobantes}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20231205 15:31:14.671" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001E245ACE250&gt;</msg>
+<msg timestamp="20231205 15:31:14.681" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000001E245B6A8D0&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:14.670" endtime="20231205 15:31:14.682"/>
+</kw>
+<kw name="Read Worksheet As Table" library="RPA.Excel.Files">
+<var>${data_as_table2}</var>
+<arg>${hoja_comprobantes}</arg>
+<arg>header=True</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<msg timestamp="20231205 15:31:14.684" level="INFO">Created table: Table(columns=['Tipo_comprobante', 'Numero_comprobante', 'Numero_cuenta'], rows=2)</msg>
+<msg timestamp="20231205 15:31:14.685" level="INFO">${data_as_table2} = Table(columns=['Tipo_comprobante', 'Numero_comprobante', 'Numero_cuenta'], rows=2)</msg>
+<status status="PASS" starttime="20231205 15:31:14.683" endtime="20231205 15:31:14.685"/>
+</kw>
+<for flavor="IN">
+<var>${row2}</var>
+<value>@{data_as_table2}</value>
+<iter>
+<var name="${row2}">{'Tipo_comprobante': '16', 'Numero_comprobante': '9154', 'Numero_cuenta': '12218'}</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero_cuenta}</var>
+<arg>${row2["Numero_cuenta"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.690" level="INFO">${numero_cuenta} = 12218</msg>
+<status status="PASS" starttime="20231205 15:31:14.687" endtime="20231205 15:31:14.690"/>
+</kw>
+<for flavor="IN">
+<var>${row}</var>
+<value>@{data_as_table}</value>
+<iter>
+<var name="${row}">{'SERVICIO': 'ESTACIONAMIENTO INTELIGENTE', 'PROVEEDOR': 'LOPEZ CAMACHO ROSA ELVIRA', 'TIPO': 16, 'PROV TIPO': 1, 'NUMERO': 12217, 'JURISDICCION': '1.1.1.01.43.000', 'CAT.PROG': 19.01, 'FF': '1.1.0', ...</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numeroc1}</var>
+<arg>${row["NUMERO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.695" level="INFO">${numeroc1} = 12217</msg>
+<status status="PASS" starttime="20231205 15:31:14.693" endtime="20231205 15:31:14.696"/>
+</kw>
+<if>
+<branch type="IF" condition="${numero_cuenta}==${numeroc1}">
+<kw name="Set Variable" library="BuiltIn">
+<var>${estado}</var>
+<arg>${row['COMPROBANTES']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.697" endtime="20231205 15:31:14.697"/>
+</kw>
+<if>
+<branch type="IF" condition="'${estado}' != 'OK'">
+<kw name="Log" library="BuiltIn">
+<arg>Checking row con el estado</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.698" endtime="20231205 15:31:14.699"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.698" endtime="20231205 15:31:14.699"/>
+</branch>
+<branch type="ELSE">
+<kw name="Continue For Loop If" library="BuiltIn">
+<arg>'${estado}' == 'OK'</arg>
+<doc>Skips the current FOR loop iteration if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.700" endtime="20231205 15:31:14.700"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Skipping row with "OK"</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.701" endtime="20231205 15:31:14.701"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.699" endtime="20231205 15:31:14.701"/>
+</branch>
+<status status="NOT RUN" starttime="20231205 15:31:14.698" endtime="20231205 15:31:14.701"/>
+</if>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Transacciones</arg>
+<arg>timeout=60</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.702" endtime="20231205 15:31:14.703"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Comprobantes</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.703" endtime="20231205 15:31:14.704"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:43</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.704" endtime="20231205 15:31:14.705"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.705" endtime="20231205 15:31:14.705"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${provtipo}</var>
+<arg>${row["PROV TIPO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.706" endtime="20231205 15:31:14.706"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:10</arg>
+<arg>keys=${provtipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.707" endtime="20231205 15:31:14.707"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerotipo}</var>
+<arg>${row["NUMERO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.707" endtime="20231205 15:31:14.708"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:11</arg>
+<arg>${numerotipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.708" endtime="20231205 15:31:14.709"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.709" endtime="20231205 15:31:14.709"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.710" endtime="20231205 15:31:14.710"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.711" endtime="20231205 15:31:14.711"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.711" endtime="20231205 15:31:14.712"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.712" endtime="20231205 15:31:14.712"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${tipofb}</var>
+<arg>${row["TIPO FC"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.713" endtime="20231205 15:31:14.713"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:7</arg>
+<arg>keys=${tipofb}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.714" endtime="20231205 15:31:14.714"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:6</arg>
+<arg>keys=16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.714" endtime="20231205 15:31:14.715"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${factura}</var>
+<arg>${row["N FACTURA"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.715" endtime="20231205 15:31:14.716"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:12</arg>
+<arg>${factura}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.716" endtime="20231205 15:31:14.716"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_actual}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.717" endtime="20231205 15:31:14.717"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${fecha_formateada}</var>
+<arg>${fecha_actual}</arg>
+<arg>%d/%m/%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.717" endtime="20231205 15:31:14.718"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>La fecha actual es: ${fecha_formateada}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.719" endtime="20231205 15:31:14.719"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>${fecha_formateada}</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.720" endtime="20231205 15:31:14.720"/>
+</kw>
+<kw name="Split String" library="String">
+<var>@{fecha_parts}</var>
+<arg>${fecha_formateada}</arg>
+<arg>/</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.720" endtime="20231205 15:31:14.721"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${day}</var>
+<arg>${fecha_parts}[0]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.721" endtime="20231205 15:31:14.722"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${month}</var>
+<arg>${fecha_parts}[1]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.722" endtime="20231205 15:31:14.722"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${year}</var>
+<arg>${fecha_parts}[2]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.723" endtime="20231205 15:31:14.723"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${year}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.724" endtime="20231205 15:31:14.724"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${day}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.724" endtime="20231205 15:31:14.725"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${month}{ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.725" endtime="20231205 15:31:14.726"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${day}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.726" endtime="20231205 15:31:14.726"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${month}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.727" endtime="20231205 15:31:14.727"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${year} {RIGHT} {ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.727" endtime="20231205 15:31:14.728"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${import}</var>
+<arg>${row["IMPORTE"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.728" endtime="20231205 15:31:14.729"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:30</arg>
+<arg>keys=${import}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.729" endtime="20231205 15:31:14.729"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>datos de comprobante cargados</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.730" endtime="20231205 15:31:14.730"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:45</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.731" endtime="20231205 15:31:14.731"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.732" endtime="20231205 15:31:14.732"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_existente}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>locator=id:6</arg>
+<arg>timeout=10</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.732" endtime="20231205 15:31:14.733"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${elemento_existente}</arg>
+<arg>Log</arg>
+<arg>Se acepto la correlatividad de comprobantes</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.734" endtime="20231205 15:31:14.734"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.735" endtime="20231205 15:31:14.735"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${elemento_existente2}</var>
+<arg>id:65535</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.735" endtime="20231205 15:31:14.736"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${result_status}</var>
+<arg>${elemento_existente2}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.736" endtime="20231205 15:31:14.737"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${result_status}'=='True'</arg>
+<arg>${texto_del_cartel}= Get Text</arg>
+<arg>${elemento_existente2}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.737" endtime="20231205 15:31:14.738"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${result}</var>
+<arg>'existe' in ${texto_del_cartel.lower()}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.738" endtime="20231205 15:31:14.739"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${result}</arg>
+<arg>Log</arg>
+<arg>Apareció el cartel de que la factura existe</arg>
+<arg>ELSE</arg>
+<arg>Send Keys</arg>
+<arg>keys={ENTER}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.739" endtime="20231205 15:31:14.740"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${excel_factura}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.740" endtime="20231205 15:31:14.740"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerofila3}</var>
+<arg>${row["ORDEN"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.741" endtime="20231205 15:31:14.741"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${numerofila2}</var>
+<arg>${numerofila3}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.742" endtime="20231205 15:31:14.742"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${numerofila2}</arg>
+<arg>${column_name1}</arg>
+<arg>${value_to_write}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.742" endtime="20231205 15:31:14.743"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cambió el valor de la celda a OK</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.743" endtime="20231205 15:31:14.743"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.744" endtime="20231205 15:31:14.744"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.745" endtime="20231205 15:31:14.745"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.745" endtime="20231205 15:31:14.746"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_existente6}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:44</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.746" endtime="20231205 15:31:14.746"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element}</var>
+<arg>RPA.Windows.Get Element</arg>
+<arg>${fecha_formateada}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.747" endtime="20231205 15:31:14.747"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${element1}</var>
+<arg>${element}</arg>
+<arg>RPA.Windows.Click</arg>
+<arg>${fecha_formateada}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.748" endtime="20231205 15:31:14.748"/>
+</kw>
+<if>
+<branch type="IF" condition="${element}==True">
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.749" endtime="20231205 15:31:14.750"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.750" endtime="20231205 15:31:14.751"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.751" endtime="20231205 15:31:14.751"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.752" endtime="20231205 15:31:14.752"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:11</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.752" endtime="20231205 15:31:14.753"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.753" endtime="20231205 15:31:14.754"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.754" endtime="20231205 15:31:14.754"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${num3}</var>
+<arg>${row["AVS"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.755" endtime="20231205 15:31:14.755"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:6</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.756" endtime="20231205 15:31:14.756"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.756" endtime="20231205 15:31:14.757"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${num3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.757" endtime="20231205 15:31:14.758"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:4</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.758" endtime="20231205 15:31:14.758"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cargo correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.759" endtime="20231205 15:31:14.759"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.760" endtime="20231205 15:31:14.760"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}{DOWN}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.760" endtime="20231205 15:31:14.761"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.761" endtime="20231205 15:31:14.762"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.762" endtime="20231205 15:31:14.762"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:11</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.763" endtime="20231205 15:31:14.763"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Salir</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.764" endtime="20231205 15:31:14.764"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Transacciones</arg>
+<arg>timeout=60</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.764" endtime="20231205 15:31:14.765"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Devengado</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.766" endtime="20231205 15:31:14.766"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:104</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.767" endtime="20231205 15:31:14.767"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:22</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.768" endtime="20231205 15:31:14.768"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.768" endtime="20231205 15:31:14.769"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:37</arg>
+<arg>keys=${provtipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.769" endtime="20231205 15:31:14.770"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:38</arg>
+<arg>${numerotipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.770" endtime="20231205 15:31:14.771"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.771" endtime="20231205 15:31:14.771"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB 6}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.772" endtime="20231205 15:31:14.772"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.772" endtime="20231205 15:31:14.773"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:11</arg>
+<arg>16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.773" endtime="20231205 15:31:14.774"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:6</arg>
+<arg>${num3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.774" endtime="20231205 15:31:14.774"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB 2}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.775" endtime="20231205 15:31:14.775"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.775" endtime="20231205 15:31:14.776"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}{DOWN}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.776" endtime="20231205 15:31:14.777"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.777" endtime="20231205 15:31:14.777"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.778" endtime="20231205 15:31:14.778"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:23</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.779" endtime="20231205 15:31:14.779"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.779" endtime="20231205 15:31:14.780"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${excel_factura}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.780" endtime="20231205 15:31:14.780"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerofila3}</var>
+<arg>${row["ORDEN"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.781" endtime="20231205 15:31:14.782"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${numerofila2}</var>
+<arg>${numerofila3}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.782" endtime="20231205 15:31:14.783"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${numerofila2}</arg>
+<arg>${column_name2}</arg>
+<arg>${value_to_write}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.783" endtime="20231205 15:31:14.783"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cambió el valor de la celda a OK</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.784" endtime="20231205 15:31:14.784"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.785" endtime="20231205 15:31:14.785"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.785" endtime="20231205 15:31:14.786"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.786" endtime="20231205 15:31:14.786"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:48</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.787" endtime="20231205 15:31:14.787"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={RIGHT 3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.788" endtime="20231205 15:31:14.788"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:45</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.788" endtime="20231205 15:31:14.789"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=PROGRAMA BECAS "MARIA ROMERO"</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.789" endtime="20231205 15:31:14.790"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.790" endtime="20231205 15:31:14.790"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=DECRETO: 157/2023</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.791" endtime="20231205 15:31:14.791"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.791" endtime="20231205 15:31:14.792"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=PERIODO: NOVIEMBRE 2023</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.792" endtime="20231205 15:31:14.793"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:43</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.793" endtime="20231205 15:31:14.793"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.794" endtime="20231205 15:31:14.794"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ALT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.794" endtime="20231205 15:31:14.795"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:48</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.795" endtime="20231205 15:31:14.796"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.796" endtime="20231205 15:31:14.796"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={LEFT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.797" endtime="20231205 15:31:14.797"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:19</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.798" endtime="20231205 15:31:14.798"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:1001</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.799" endtime="20231205 15:31:14.799"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:10</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.800" endtime="20231205 15:31:14.800"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>15s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.801" endtime="20231205 15:31:14.801"/>
+</kw>
+<kw name="Double Click" library="RPA.Windows">
+<arg>id:1148</arg>
+<arg>timeout=160</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Double mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.801" endtime="20231205 15:31:14.802"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={CTRL}{A}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.802" endtime="20231205 15:31:14.803"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DEL}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.803" endtime="20231205 15:31:14.803"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.804" endtime="20231205 15:31:14.804"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${contador}</var>
+<arg>${contador}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.804" endtime="20231205 15:31:14.805"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${contador}</var>
+<arg>${contador} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.805" endtime="20231205 15:31:14.806"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero_de_afectacion}</var>
+<arg>${num3}_(${contador})</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.806" endtime="20231205 15:31:14.807"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_hoy}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.807" endtime="20231205 15:31:14.807"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${año}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.808" endtime="20231205 15:31:14.808"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${mes}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%m</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.808" endtime="20231205 15:31:14.809"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${día}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%d</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.809" endtime="20231205 15:31:14.810"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_año}</var>
+<arg>${descargas}\\${año}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.810" endtime="20231205 15:31:14.810"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_mes}</var>
+<arg>${ruta_año}\\${mes}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.811" endtime="20231205 15:31:14.811"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_dia}</var>
+<arg>${ruta_mes}\\${día}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.812" endtime="20231205 15:31:14.812"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=C:\\Users\\zcheveste\\Documents\\${año}\\${mes}\\${día}\\${nombre_carpeta}\\BOT_${numero_de_afectacion}.pdf</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.812" endtime="20231205 15:31:14.813"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.813" endtime="20231205 15:31:14.814"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.814" endtime="20231205 15:31:14.815"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:AVPageView</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.815" endtime="20231205 15:31:14.816"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={CTRL}{Q}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.816" endtime="20231205 15:31:14.816"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.817" endtime="20231205 15:31:14.817"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:18</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.818" endtime="20231205 15:31:14.818"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.748" endtime="20231205 15:31:14.818"/>
+</branch>
+<status status="NOT RUN" starttime="20231205 15:31:14.748" endtime="20231205 15:31:14.819"/>
+</if>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.819" endtime="20231205 15:31:14.819"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.696" endtime="20231205 15:31:14.820"/>
+</branch>
+<status status="PASS" starttime="20231205 15:31:14.696" endtime="20231205 15:31:14.820"/>
+</if>
+<status status="PASS" starttime="20231205 15:31:14.693" endtime="20231205 15:31:14.820"/>
+</iter>
+<iter>
+<var name="${row}">{'SERVICIO': 'ESTACIONAMIENTO INTELIGENTE', 'PROVEEDOR': 'OCAMPO BEATRIZ VIVIANA ', 'TIPO': 16, 'PROV TIPO': 1, 'NUMERO': 12219, 'JURISDICCION': '1.1.1.01.43.000', 'CAT.PROG': 19.01, 'FF': '1.1.0', 'O...</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numeroc1}</var>
+<arg>${row["NUMERO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.823" level="INFO">${numeroc1} = 12219</msg>
+<status status="PASS" starttime="20231205 15:31:14.821" endtime="20231205 15:31:14.823"/>
+</kw>
+<if>
+<branch type="IF" condition="${numero_cuenta}==${numeroc1}">
+<kw name="Set Variable" library="BuiltIn">
+<var>${estado}</var>
+<arg>${row['COMPROBANTES']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.824" endtime="20231205 15:31:14.825"/>
+</kw>
+<if>
+<branch type="IF" condition="'${estado}' != 'OK'">
+<kw name="Log" library="BuiltIn">
+<arg>Checking row con el estado</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.825" endtime="20231205 15:31:14.826"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.825" endtime="20231205 15:31:14.826"/>
+</branch>
+<branch type="ELSE">
+<kw name="Continue For Loop If" library="BuiltIn">
+<arg>'${estado}' == 'OK'</arg>
+<doc>Skips the current FOR loop iteration if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.827" endtime="20231205 15:31:14.827"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Skipping row with "OK"</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.827" endtime="20231205 15:31:14.828"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.826" endtime="20231205 15:31:14.828"/>
+</branch>
+<status status="NOT RUN" starttime="20231205 15:31:14.825" endtime="20231205 15:31:14.828"/>
+</if>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Transacciones</arg>
+<arg>timeout=60</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.829" endtime="20231205 15:31:14.829"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Comprobantes</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.830" endtime="20231205 15:31:14.830"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:43</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.832" endtime="20231205 15:31:14.832"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.833" endtime="20231205 15:31:14.833"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${provtipo}</var>
+<arg>${row["PROV TIPO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.833" endtime="20231205 15:31:14.834"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:10</arg>
+<arg>keys=${provtipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.834" endtime="20231205 15:31:14.834"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerotipo}</var>
+<arg>${row["NUMERO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.835" endtime="20231205 15:31:14.835"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:11</arg>
+<arg>${numerotipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.836" endtime="20231205 15:31:14.836"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.836" endtime="20231205 15:31:14.837"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.837" endtime="20231205 15:31:14.838"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.838" endtime="20231205 15:31:14.838"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.839" endtime="20231205 15:31:14.839"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.839" endtime="20231205 15:31:14.840"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${tipofb}</var>
+<arg>${row["TIPO FC"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.840" endtime="20231205 15:31:14.841"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:7</arg>
+<arg>keys=${tipofb}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.841" endtime="20231205 15:31:14.841"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:6</arg>
+<arg>keys=16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.842" endtime="20231205 15:31:14.842"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${factura}</var>
+<arg>${row["N FACTURA"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.842" endtime="20231205 15:31:14.843"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:12</arg>
+<arg>${factura}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.843" endtime="20231205 15:31:14.844"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_actual}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.844" endtime="20231205 15:31:14.844"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${fecha_formateada}</var>
+<arg>${fecha_actual}</arg>
+<arg>%d/%m/%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.845" endtime="20231205 15:31:14.845"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>La fecha actual es: ${fecha_formateada}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.845" endtime="20231205 15:31:14.845"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>${fecha_formateada}</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.847" endtime="20231205 15:31:14.847"/>
+</kw>
+<kw name="Split String" library="String">
+<var>@{fecha_parts}</var>
+<arg>${fecha_formateada}</arg>
+<arg>/</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.848" endtime="20231205 15:31:14.848"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${day}</var>
+<arg>${fecha_parts}[0]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.848" endtime="20231205 15:31:14.849"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${month}</var>
+<arg>${fecha_parts}[1]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.849" endtime="20231205 15:31:14.849"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${year}</var>
+<arg>${fecha_parts}[2]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.850" endtime="20231205 15:31:14.850"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${year}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.851" endtime="20231205 15:31:14.851"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${day}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.851" endtime="20231205 15:31:14.852"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${month}{ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.852" endtime="20231205 15:31:14.852"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${day}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.853" endtime="20231205 15:31:14.853"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${month}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.853" endtime="20231205 15:31:14.853"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${year} {RIGHT} {ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.853" endtime="20231205 15:31:14.855"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${import}</var>
+<arg>${row["IMPORTE"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.855" endtime="20231205 15:31:14.855"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:30</arg>
+<arg>keys=${import}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.856" endtime="20231205 15:31:14.856"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>datos de comprobante cargados</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.857" endtime="20231205 15:31:14.857"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:45</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.857" endtime="20231205 15:31:14.857"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.858" endtime="20231205 15:31:14.858"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_existente}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>locator=id:6</arg>
+<arg>timeout=10</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.860" endtime="20231205 15:31:14.860"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${elemento_existente}</arg>
+<arg>Log</arg>
+<arg>Se acepto la correlatividad de comprobantes</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.860" endtime="20231205 15:31:14.861"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.861" endtime="20231205 15:31:14.862"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${elemento_existente2}</var>
+<arg>id:65535</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.862" endtime="20231205 15:31:14.862"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${result_status}</var>
+<arg>${elemento_existente2}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.863" endtime="20231205 15:31:14.863"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${result_status}'=='True'</arg>
+<arg>${texto_del_cartel}= Get Text</arg>
+<arg>${elemento_existente2}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.864" endtime="20231205 15:31:14.864"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${result}</var>
+<arg>'existe' in ${texto_del_cartel.lower()}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.864" endtime="20231205 15:31:14.865"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${result}</arg>
+<arg>Log</arg>
+<arg>Apareció el cartel de que la factura existe</arg>
+<arg>ELSE</arg>
+<arg>Send Keys</arg>
+<arg>keys={ENTER}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.865" endtime="20231205 15:31:14.866"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${excel_factura}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.866" endtime="20231205 15:31:14.866"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerofila3}</var>
+<arg>${row["ORDEN"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.867" endtime="20231205 15:31:14.867"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${numerofila2}</var>
+<arg>${numerofila3}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.867" endtime="20231205 15:31:14.868"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${numerofila2}</arg>
+<arg>${column_name1}</arg>
+<arg>${value_to_write}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.868" endtime="20231205 15:31:14.868"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cambió el valor de la celda a OK</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.869" endtime="20231205 15:31:14.869"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.870" endtime="20231205 15:31:14.870"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.870" endtime="20231205 15:31:14.871"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.871" endtime="20231205 15:31:14.871"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_existente6}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:44</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.872" endtime="20231205 15:31:14.872"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element}</var>
+<arg>RPA.Windows.Get Element</arg>
+<arg>${fecha_formateada}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.872" endtime="20231205 15:31:14.873"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${element1}</var>
+<arg>${element}</arg>
+<arg>RPA.Windows.Click</arg>
+<arg>${fecha_formateada}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.873" endtime="20231205 15:31:14.874"/>
+</kw>
+<if>
+<branch type="IF" condition="${element}==True">
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.874" endtime="20231205 15:31:14.875"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.875" endtime="20231205 15:31:14.875"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.876" endtime="20231205 15:31:14.876"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.877" endtime="20231205 15:31:14.877"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:11</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.877" endtime="20231205 15:31:14.878"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.878" endtime="20231205 15:31:14.879"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.879" endtime="20231205 15:31:14.879"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${num3}</var>
+<arg>${row["AVS"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.880" endtime="20231205 15:31:14.880"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:6</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.881" endtime="20231205 15:31:14.881"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.881" endtime="20231205 15:31:14.882"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${num3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.882" endtime="20231205 15:31:14.884"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:4</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.884" endtime="20231205 15:31:14.884"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cargo correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.885" endtime="20231205 15:31:14.885"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.885" endtime="20231205 15:31:14.886"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}{DOWN}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.886" endtime="20231205 15:31:14.886"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.887" endtime="20231205 15:31:14.887"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.888" endtime="20231205 15:31:14.888"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:11</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.888" endtime="20231205 15:31:14.889"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Salir</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.889" endtime="20231205 15:31:14.890"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Transacciones</arg>
+<arg>timeout=60</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.890" endtime="20231205 15:31:14.890"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Devengado</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.891" endtime="20231205 15:31:14.891"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:104</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.892" endtime="20231205 15:31:14.892"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:22</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.892" endtime="20231205 15:31:14.893"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.893" endtime="20231205 15:31:14.893"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:37</arg>
+<arg>keys=${provtipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.894" endtime="20231205 15:31:14.894"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:38</arg>
+<arg>${numerotipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.895" endtime="20231205 15:31:14.895"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.895" endtime="20231205 15:31:14.896"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB 6}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.896" endtime="20231205 15:31:14.896"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.897" endtime="20231205 15:31:14.897"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:11</arg>
+<arg>16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.898" endtime="20231205 15:31:14.898"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:6</arg>
+<arg>${num3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.898" endtime="20231205 15:31:14.899"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB 2}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.899" endtime="20231205 15:31:14.899"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.900" endtime="20231205 15:31:14.900"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}{DOWN}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.901" endtime="20231205 15:31:14.901"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.901" endtime="20231205 15:31:14.902"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.902" endtime="20231205 15:31:14.902"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:23</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.903" endtime="20231205 15:31:14.903"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.904" endtime="20231205 15:31:14.904"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${excel_factura}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.905" endtime="20231205 15:31:14.905"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerofila3}</var>
+<arg>${row["ORDEN"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.905" endtime="20231205 15:31:14.906"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${numerofila2}</var>
+<arg>${numerofila3}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.906" endtime="20231205 15:31:14.906"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${numerofila2}</arg>
+<arg>${column_name2}</arg>
+<arg>${value_to_write}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.907" endtime="20231205 15:31:14.907"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cambió el valor de la celda a OK</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.908" endtime="20231205 15:31:14.908"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.909" endtime="20231205 15:31:14.909"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.910" endtime="20231205 15:31:14.910"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.910" endtime="20231205 15:31:14.912"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:48</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.912" endtime="20231205 15:31:14.912"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={RIGHT 3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.913" endtime="20231205 15:31:14.913"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:45</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.914" endtime="20231205 15:31:14.914"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=PROGRAMA BECAS "MARIA ROMERO"</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.914" endtime="20231205 15:31:14.915"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.915" endtime="20231205 15:31:14.916"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=DECRETO: 157/2023</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.916" endtime="20231205 15:31:14.916"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.917" endtime="20231205 15:31:14.917"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=PERIODO: NOVIEMBRE 2023</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.917" endtime="20231205 15:31:14.918"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:43</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.918" endtime="20231205 15:31:14.918"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.919" endtime="20231205 15:31:14.919"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ALT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.920" endtime="20231205 15:31:14.920"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:48</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.920" endtime="20231205 15:31:14.921"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.921" endtime="20231205 15:31:14.922"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={LEFT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.922" endtime="20231205 15:31:14.922"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:19</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.923" endtime="20231205 15:31:14.923"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:1001</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.924" endtime="20231205 15:31:14.924"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:10</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.924" endtime="20231205 15:31:14.924"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>15s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.925" endtime="20231205 15:31:14.925"/>
+</kw>
+<kw name="Double Click" library="RPA.Windows">
+<arg>id:1148</arg>
+<arg>timeout=160</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Double mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.926" endtime="20231205 15:31:14.926"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={CTRL}{A}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.926" endtime="20231205 15:31:14.927"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DEL}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.927" endtime="20231205 15:31:14.928"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.928" endtime="20231205 15:31:14.928"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${contador}</var>
+<arg>${contador}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.929" endtime="20231205 15:31:14.929"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${contador}</var>
+<arg>${contador} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.930" endtime="20231205 15:31:14.930"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero_de_afectacion}</var>
+<arg>${num3}_(${contador})</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.930" endtime="20231205 15:31:14.931"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_hoy}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.931" endtime="20231205 15:31:14.931"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${año}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.932" endtime="20231205 15:31:14.932"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${mes}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%m</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.933" endtime="20231205 15:31:14.933"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${día}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%d</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.933" endtime="20231205 15:31:14.934"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_año}</var>
+<arg>${descargas}\\${año}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.934" endtime="20231205 15:31:14.934"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_mes}</var>
+<arg>${ruta_año}\\${mes}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.935" endtime="20231205 15:31:14.935"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_dia}</var>
+<arg>${ruta_mes}\\${día}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.936" endtime="20231205 15:31:14.936"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=C:\\Users\\zcheveste\\Documents\\${año}\\${mes}\\${día}\\${nombre_carpeta}\\BOT_${numero_de_afectacion}.pdf</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.936" endtime="20231205 15:31:14.937"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.937" endtime="20231205 15:31:14.937"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.938" endtime="20231205 15:31:14.938"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:AVPageView</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.939" endtime="20231205 15:31:14.939"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={CTRL}{Q}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.940" endtime="20231205 15:31:14.940"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.941" endtime="20231205 15:31:14.941"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:18</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.942" endtime="20231205 15:31:14.942"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.874" endtime="20231205 15:31:14.942"/>
+</branch>
+<status status="NOT RUN" starttime="20231205 15:31:14.874" endtime="20231205 15:31:14.943"/>
+</if>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.943" endtime="20231205 15:31:14.943"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.824" endtime="20231205 15:31:14.945"/>
+</branch>
+<status status="PASS" starttime="20231205 15:31:14.823" endtime="20231205 15:31:14.945"/>
+</if>
+<status status="PASS" starttime="20231205 15:31:14.820" endtime="20231205 15:31:14.945"/>
+</iter>
+<iter>
+<var name="${row}">{'SERVICIO': 'ESTACIONAMIENTO INTELIGENTE', 'PROVEEDOR': 'RODRIGUEZ OSPINA LUIS ALEXANDER ', 'TIPO': 16, 'PROV TIPO': 1, 'NUMERO': 12223, 'JURISDICCION': '1.1.1.01.43.000', 'CAT.PROG': 19.01, 'FF': '1...</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numeroc1}</var>
+<arg>${row["NUMERO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:14.948" level="INFO">${numeroc1} = 12223</msg>
+<status status="PASS" starttime="20231205 15:31:14.946" endtime="20231205 15:31:14.948"/>
+</kw>
+<if>
+<branch type="IF" condition="${numero_cuenta}==${numeroc1}">
+<kw name="Set Variable" library="BuiltIn">
+<var>${estado}</var>
+<arg>${row['COMPROBANTES']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.949" endtime="20231205 15:31:14.950"/>
+</kw>
+<if>
+<branch type="IF" condition="'${estado}' != 'OK'">
+<kw name="Log" library="BuiltIn">
+<arg>Checking row con el estado</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.951" endtime="20231205 15:31:14.951"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.950" endtime="20231205 15:31:14.951"/>
+</branch>
+<branch type="ELSE">
+<kw name="Continue For Loop If" library="BuiltIn">
+<arg>'${estado}' == 'OK'</arg>
+<doc>Skips the current FOR loop iteration if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.952" endtime="20231205 15:31:14.952"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Skipping row with "OK"</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.953" endtime="20231205 15:31:14.953"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.951" endtime="20231205 15:31:14.953"/>
+</branch>
+<status status="NOT RUN" starttime="20231205 15:31:14.950" endtime="20231205 15:31:14.953"/>
+</if>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Transacciones</arg>
+<arg>timeout=60</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.953" endtime="20231205 15:31:14.953"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Comprobantes</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.955" endtime="20231205 15:31:14.955"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:43</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.956" endtime="20231205 15:31:14.956"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.956" endtime="20231205 15:31:14.957"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${provtipo}</var>
+<arg>${row["PROV TIPO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.957" endtime="20231205 15:31:14.958"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:10</arg>
+<arg>keys=${provtipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.958" endtime="20231205 15:31:14.958"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerotipo}</var>
+<arg>${row["NUMERO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.959" endtime="20231205 15:31:14.959"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:11</arg>
+<arg>${numerotipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.959" endtime="20231205 15:31:14.960"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.960" endtime="20231205 15:31:14.961"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.961" endtime="20231205 15:31:14.961"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.962" endtime="20231205 15:31:14.962"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.962" endtime="20231205 15:31:14.963"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.963" endtime="20231205 15:31:14.964"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${tipofb}</var>
+<arg>${row["TIPO FC"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.964" endtime="20231205 15:31:14.964"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:7</arg>
+<arg>keys=${tipofb}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.965" endtime="20231205 15:31:14.965"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:6</arg>
+<arg>keys=16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.965" endtime="20231205 15:31:14.966"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${factura}</var>
+<arg>${row["N FACTURA"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.966" endtime="20231205 15:31:14.967"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:12</arg>
+<arg>${factura}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.967" endtime="20231205 15:31:14.967"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_actual}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.968" endtime="20231205 15:31:14.968"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${fecha_formateada}</var>
+<arg>${fecha_actual}</arg>
+<arg>%d/%m/%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.968" endtime="20231205 15:31:14.969"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>La fecha actual es: ${fecha_formateada}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.969" endtime="20231205 15:31:14.970"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>${fecha_formateada}</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.970" endtime="20231205 15:31:14.970"/>
+</kw>
+<kw name="Split String" library="String">
+<var>@{fecha_parts}</var>
+<arg>${fecha_formateada}</arg>
+<arg>/</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.971" endtime="20231205 15:31:14.971"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${day}</var>
+<arg>${fecha_parts}[0]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.972" endtime="20231205 15:31:14.972"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${month}</var>
+<arg>${fecha_parts}[1]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.973" endtime="20231205 15:31:14.973"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${year}</var>
+<arg>${fecha_parts}[2]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.974" endtime="20231205 15:31:14.974"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${year}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.974" endtime="20231205 15:31:14.975"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${day}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.975" endtime="20231205 15:31:14.975"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${month}{ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.976" endtime="20231205 15:31:14.976"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${day}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.977" endtime="20231205 15:31:14.977"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${month}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.977" endtime="20231205 15:31:14.978"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${year} {RIGHT} {ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.978" endtime="20231205 15:31:14.978"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${import}</var>
+<arg>${row["IMPORTE"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.979" endtime="20231205 15:31:14.979"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:30</arg>
+<arg>keys=${import}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.980" endtime="20231205 15:31:14.980"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>datos de comprobante cargados</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.980" endtime="20231205 15:31:14.981"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:45</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.981" endtime="20231205 15:31:14.982"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.982" endtime="20231205 15:31:14.982"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_existente}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>locator=id:6</arg>
+<arg>timeout=10</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.983" endtime="20231205 15:31:14.983"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${elemento_existente}</arg>
+<arg>Log</arg>
+<arg>Se acepto la correlatividad de comprobantes</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.983" endtime="20231205 15:31:14.984"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.984" endtime="20231205 15:31:14.985"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${elemento_existente2}</var>
+<arg>id:65535</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.985" endtime="20231205 15:31:14.985"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${result_status}</var>
+<arg>${elemento_existente2}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.986" endtime="20231205 15:31:14.986"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${result_status}'=='True'</arg>
+<arg>${texto_del_cartel}= Get Text</arg>
+<arg>${elemento_existente2}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.986" endtime="20231205 15:31:14.987"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${result}</var>
+<arg>'existe' in ${texto_del_cartel.lower()}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.987" endtime="20231205 15:31:14.988"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${result}</arg>
+<arg>Log</arg>
+<arg>Apareció el cartel de que la factura existe</arg>
+<arg>ELSE</arg>
+<arg>Send Keys</arg>
+<arg>keys={ENTER}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.988" endtime="20231205 15:31:14.989"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${excel_factura}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.990" endtime="20231205 15:31:14.990"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerofila3}</var>
+<arg>${row["ORDEN"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.990" endtime="20231205 15:31:14.991"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${numerofila2}</var>
+<arg>${numerofila3}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.991" endtime="20231205 15:31:14.991"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${numerofila2}</arg>
+<arg>${column_name1}</arg>
+<arg>${value_to_write}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.992" endtime="20231205 15:31:14.992"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cambió el valor de la celda a OK</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.993" endtime="20231205 15:31:14.993"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.993" endtime="20231205 15:31:14.994"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.994" endtime="20231205 15:31:14.994"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.995" endtime="20231205 15:31:14.995"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_existente6}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:44</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.995" endtime="20231205 15:31:14.996"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element}</var>
+<arg>RPA.Windows.Get Element</arg>
+<arg>${fecha_formateada}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.996" endtime="20231205 15:31:14.996"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${element1}</var>
+<arg>${element}</arg>
+<arg>RPA.Windows.Click</arg>
+<arg>${fecha_formateada}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.997" endtime="20231205 15:31:14.997"/>
+</kw>
+<if>
+<branch type="IF" condition="${element}==True">
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.998" endtime="20231205 15:31:14.998"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:14.999" endtime="20231205 15:31:14.999"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.000" endtime="20231205 15:31:15.000"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.000" endtime="20231205 15:31:15.001"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:11</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.001" endtime="20231205 15:31:15.002"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.002" endtime="20231205 15:31:15.002"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.003" endtime="20231205 15:31:15.003"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${num3}</var>
+<arg>${row["AVS"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.004" endtime="20231205 15:31:15.004"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:6</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.005" endtime="20231205 15:31:15.005"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.006" endtime="20231205 15:31:15.006"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${num3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.006" endtime="20231205 15:31:15.007"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_encontrado}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>id:4</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.007" endtime="20231205 15:31:15.008"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cargo correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.008" endtime="20231205 15:31:15.008"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.009" endtime="20231205 15:31:15.009"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}{DOWN}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.009" endtime="20231205 15:31:15.010"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.010" endtime="20231205 15:31:15.011"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.011" endtime="20231205 15:31:15.011"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:11</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.012" endtime="20231205 15:31:15.012"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Salir</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.013" endtime="20231205 15:31:15.013"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Transacciones</arg>
+<arg>timeout=60</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.013" endtime="20231205 15:31:15.014"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Devengado</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.014" endtime="20231205 15:31:15.015"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:104</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.015" endtime="20231205 15:31:15.015"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:22</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.016" endtime="20231205 15:31:15.016"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.017" endtime="20231205 15:31:15.017"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:37</arg>
+<arg>keys=${provtipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.017" endtime="20231205 15:31:15.018"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:38</arg>
+<arg>${numerotipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.018" endtime="20231205 15:31:15.018"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.019" endtime="20231205 15:31:15.019"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB 6}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.019" endtime="20231205 15:31:15.020"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.021" endtime="20231205 15:31:15.021"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:11</arg>
+<arg>16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.022" endtime="20231205 15:31:15.022"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:6</arg>
+<arg>${num3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.022" endtime="20231205 15:31:15.023"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB 2}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.023" endtime="20231205 15:31:15.023"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.024" endtime="20231205 15:31:15.024"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={TAB}{DOWN}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.025" endtime="20231205 15:31:15.025"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.025" endtime="20231205 15:31:15.026"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.026" endtime="20231205 15:31:15.026"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:23</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.027" endtime="20231205 15:31:15.027"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.028" endtime="20231205 15:31:15.028"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${excel_factura}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.028" endtime="20231205 15:31:15.029"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerofila3}</var>
+<arg>${row["ORDEN"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.029" endtime="20231205 15:31:15.029"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${numerofila2}</var>
+<arg>${numerofila3}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.030" endtime="20231205 15:31:15.030"/>
+</kw>
+<kw name="Set Cell Value" library="RPA.Excel.Files">
+<arg>${numerofila2}</arg>
+<arg>${column_name2}</arg>
+<arg>${value_to_write}</arg>
+<doc>Set a cell value in the given worksheet.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.031" endtime="20231205 15:31:15.031"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Se cambió el valor de la celda a OK</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.031" endtime="20231205 15:31:15.032"/>
+</kw>
+<kw name="Save Workbook" library="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.032" endtime="20231205 15:31:15.032"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.033" endtime="20231205 15:31:15.033"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.033" endtime="20231205 15:31:15.034"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:48</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.034" endtime="20231205 15:31:15.035"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={RIGHT 3}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.035" endtime="20231205 15:31:15.035"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:45</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.036" endtime="20231205 15:31:15.036"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=PROGRAMA BECAS "MARIA ROMERO"</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.037" endtime="20231205 15:31:15.037"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.038" endtime="20231205 15:31:15.038"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=DECRETO: 157/2023</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.039" endtime="20231205 15:31:15.039"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.039" endtime="20231205 15:31:15.040"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=PERIODO: NOVIEMBRE 2023</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.040" endtime="20231205 15:31:15.040"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:43</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.041" endtime="20231205 15:31:15.041"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.042" endtime="20231205 15:31:15.042"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ALT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.042" endtime="20231205 15:31:15.043"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:48</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.043" endtime="20231205 15:31:15.043"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.044" endtime="20231205 15:31:15.044"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={LEFT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.045" endtime="20231205 15:31:15.045"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:19</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.046" endtime="20231205 15:31:15.046"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:1001</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.046" endtime="20231205 15:31:15.047"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:10</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.047" endtime="20231205 15:31:15.048"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>15s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.048" endtime="20231205 15:31:15.048"/>
+</kw>
+<kw name="Double Click" library="RPA.Windows">
+<arg>id:1148</arg>
+<arg>timeout=160</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Double mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.049" endtime="20231205 15:31:15.049"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={CTRL}{A}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.050" endtime="20231205 15:31:15.050"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DEL}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.050" endtime="20231205 15:31:15.051"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.051" endtime="20231205 15:31:15.051"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${contador}</var>
+<arg>${contador}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.052" endtime="20231205 15:31:15.053"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${contador}</var>
+<arg>${contador} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.053" endtime="20231205 15:31:15.054"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero_de_afectacion}</var>
+<arg>${num3}_(${contador})</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.054" endtime="20231205 15:31:15.054"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_hoy}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.055" endtime="20231205 15:31:15.055"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${año}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.055" endtime="20231205 15:31:15.056"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${mes}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%m</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.057" endtime="20231205 15:31:15.057"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${día}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%d</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.057" endtime="20231205 15:31:15.058"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_año}</var>
+<arg>${descargas}\\${año}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.058" endtime="20231205 15:31:15.059"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_mes}</var>
+<arg>${ruta_año}\\${mes}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.059" endtime="20231205 15:31:15.059"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_dia}</var>
+<arg>${ruta_mes}\\${día}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.060" endtime="20231205 15:31:15.060"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=C:\\Users\\zcheveste\\Documents\\${año}\\${mes}\\${día}\\${nombre_carpeta}\\BOT_${numero_de_afectacion}.pdf</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.060" endtime="20231205 15:31:15.061"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.061" endtime="20231205 15:31:15.061"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.062" endtime="20231205 15:31:15.062"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:AVPageView</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.063" endtime="20231205 15:31:15.063"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={CTRL}{Q}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.063" endtime="20231205 15:31:15.064"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.064" endtime="20231205 15:31:15.064"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:18</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.065" endtime="20231205 15:31:15.065"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.998" endtime="20231205 15:31:15.066"/>
+</branch>
+<status status="NOT RUN" starttime="20231205 15:31:14.998" endtime="20231205 15:31:15.066"/>
+</if>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.066" endtime="20231205 15:31:15.066"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:14.949" endtime="20231205 15:31:15.067"/>
+</branch>
+<status status="PASS" starttime="20231205 15:31:14.949" endtime="20231205 15:31:15.067"/>
+</if>
+<status status="PASS" starttime="20231205 15:31:14.945" endtime="20231205 15:31:15.067"/>
+</iter>
+<iter>
+<var name="${row}">{'SERVICIO': 'ESTACIONAMIENTO INTELIGENTE', 'PROVEEDOR': 'TOMMASONE ENZO RICARDO', 'TIPO': 16, 'PROV TIPO': 1, 'NUMERO': 12218, 'JURISDICCION': '1.1.1.01.43.000', 'CAT.PROG': 19.01, 'FF': '1.1.0', 'OG...</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numeroc1}</var>
+<arg>${row["NUMERO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:15.071" level="INFO">${numeroc1} = 12218</msg>
+<status status="PASS" starttime="20231205 15:31:15.069" endtime="20231205 15:31:15.072"/>
+</kw>
+<if>
+<branch type="IF" condition="${numero_cuenta}==${numeroc1}">
+<kw name="Set Variable" library="BuiltIn">
+<var>${estado}</var>
+<arg>${row['COMPROBANTES']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:15.075" level="INFO">${estado} = None</msg>
+<status status="PASS" starttime="20231205 15:31:15.073" endtime="20231205 15:31:15.075"/>
+</kw>
+<if>
+<branch type="IF" condition="'${estado}' != 'OK'">
+<kw name="Log" library="BuiltIn">
+<arg>Checking row con el estado</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20231205 15:31:15.077" level="INFO">Checking row con el estado</msg>
+<status status="PASS" starttime="20231205 15:31:15.076" endtime="20231205 15:31:15.077"/>
+</kw>
+<status status="PASS" starttime="20231205 15:31:15.075" endtime="20231205 15:31:15.077"/>
+</branch>
+<branch type="ELSE">
+<kw name="Continue For Loop If" library="BuiltIn">
+<arg>'${estado}' == 'OK'</arg>
+<doc>Skips the current FOR loop iteration if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.078" endtime="20231205 15:31:15.078"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Skipping row with "OK"</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20231205 15:31:15.079" endtime="20231205 15:31:15.079"/>
+</kw>
+<status status="NOT RUN" starttime="20231205 15:31:15.077" endtime="20231205 15:31:15.079"/>
+</branch>
+<status status="PASS" starttime="20231205 15:31:15.075" endtime="20231205 15:31:15.079"/>
+</if>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Transacciones</arg>
+<arg>timeout=60</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<msg timestamp="20231205 15:31:15.082" level="INFO">Locator timeout set to: 60.000000</msg>
+<msg timestamp="20231205 15:31:15.082" level="INFO">Getting element with locator: name:Transacciones</msg>
+<msg timestamp="20231205 15:31:15.092" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C21F50&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:15.093" level="INFO">Locator 'name:Transacciones' produced matcher: MatchObject(locators=[('Name', 'Transacciones', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:15.558" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.MenuItemControl object at 0x000001E241AC2810&gt;, locator='name:Transacciones', name='Transacciones', automation_id='', control_type='MenuItemControl', class_name='', left=154, right=241, top=26, bottom=45, width=87, height=19, xcenter=197, ycenter=35)</msg>
+<status status="PASS" starttime="20231205 15:31:15.080" endtime="20231205 15:31:16.121"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>name:Comprobantes</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<msg timestamp="20231205 15:31:16.125" level="INFO">Locator timeout set to: 30.000000</msg>
+<msg timestamp="20231205 15:31:16.125" level="INFO">Getting element with locator: name:Comprobantes</msg>
+<msg timestamp="20231205 15:31:16.128" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E2434CB290&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:16.128" level="INFO">Locator 'name:Comprobantes' produced matcher: MatchObject(locators=[('Name', 'Comprobantes', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:16.188" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.MenuItemControl object at 0x000001E245C35150&gt;, locator='name:Comprobantes', name='Comprobantes', automation_id='102', control_type='MenuItemControl', class_name='', left=157, right=391, top=136, bottom=158, width=234, height=22, xcenter=274, ycenter=147)</msg>
+<status status="PASS" starttime="20231205 15:31:16.123" endtime="20231205 15:31:16.754"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:43</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<msg timestamp="20231205 15:31:16.968" level="INFO">Locator timeout set to: 10.000000</msg>
+<msg timestamp="20231205 15:31:16.969" level="INFO">Getting element with locator: id:43</msg>
+<msg timestamp="20231205 15:31:16.971" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E24589C210&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:16.972" level="INFO">Locator 'id:43' produced matcher: MatchObject(locators=[('AutomationId', '43', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:18.165" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.ButtonControl object at 0x000001E245C345D0&gt;, locator='id:43', name='Nuevo', automation_id='43', control_type='ButtonControl', class_name='ThunderRT6CommandButton', left=305, right=354, top=197, bottom=220, width=49, height=23, xcenter=329, ycenter=208)</msg>
+<status status="PASS" starttime="20231205 15:31:16.966" endtime="20231205 15:31:18.718"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20231205 15:31:19.221" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20231205 15:31:18.720" endtime="20231205 15:31:19.221"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${provtipo}</var>
+<arg>${row["PROV TIPO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:19.224" level="INFO">${provtipo} = 1</msg>
+<status status="PASS" starttime="20231205 15:31:19.222" endtime="20231205 15:31:19.224"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:10</arg>
+<arg>keys=${provtipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:19.227" level="INFO">Getting element with locator: id:10</msg>
+<msg timestamp="20231205 15:31:19.230" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E2434CB290&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:19.231" level="INFO">Locator 'id:10' produced matcher: MatchObject(locators=[('AutomationId', '10', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:19.285" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.EditControl object at 0x000001E245C25190&gt;, locator='id:10', name='', automation_id='10', control_type='EditControl', class_name='ThunderRT6TextBox', left=366, right=402, top=246, bottom=265, width=36, height=19, xcenter=384, ycenter=255)</msg>
+<msg timestamp="20231205 15:31:19.287" level="INFO">Sending keys '1' to element: ControlType: EditControl    ClassName: ThunderRT6TextBox    AutomationId: 10    Rect: (366,246,402,265)[36x19]    Name: ''    Handle: 0x6406FA(6555386)</msg>
+<status status="PASS" starttime="20231205 15:31:19.225" endtime="20231205 15:31:19.799"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numerotipo}</var>
+<arg>${row["NUMERO"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:19.802" level="INFO">${numerotipo} = 12218</msg>
+<status status="PASS" starttime="20231205 15:31:19.799" endtime="20231205 15:31:19.802"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:11</arg>
+<arg>${numerotipo}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:19.805" level="INFO">Getting element with locator: id:11</msg>
+<msg timestamp="20231205 15:31:19.807" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C35010&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:19.808" level="INFO">Locator 'id:11' produced matcher: MatchObject(locators=[('AutomationId', '11', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:19.873" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.EditControl object at 0x000001E245C34750&gt;, locator='id:11', name='', automation_id='11', control_type='EditControl', class_name='ThunderRT6TextBox', left=366, right=429, top=266, bottom=285, width=63, height=19, xcenter=397, ycenter=275)</msg>
+<msg timestamp="20231205 15:31:19.875" level="INFO">Sending keys '12218' to element: ControlType: EditControl    ClassName: ThunderRT6TextBox    AutomationId: 11    Rect: (366,266,429,285)[63x19]    Name: ''    Handle: 0x1B07C8(1771464)</msg>
+<status status="PASS" starttime="20231205 15:31:19.802" endtime="20231205 15:31:20.430"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:20.432" level="INFO">Sending keys '{ENTER}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:20.430" endtime="20231205 15:31:20.954"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20231205 15:31:21.455" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20231205 15:31:20.954" endtime="20231205 15:31:21.455"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:21.457" level="INFO">Sending keys '{DELETE}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:21.456" endtime="20231205 15:31:21.979"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20231205 15:31:22.480" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20231205 15:31:21.979" endtime="20231205 15:31:22.480"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys={DELETE}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:22.482" level="INFO">Sending keys '{DELETE}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:22.481" endtime="20231205 15:31:23.004"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${tipofb}</var>
+<arg>${row["TIPO FC"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:23.007" level="INFO">${tipofb} = 45</msg>
+<status status="PASS" starttime="20231205 15:31:23.004" endtime="20231205 15:31:23.007"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:7</arg>
+<arg>keys=${tipofb}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:23.009" level="INFO">Getting element with locator: id:7</msg>
+<msg timestamp="20231205 15:31:23.012" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C26F50&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:23.012" level="INFO">Locator 'id:7' produced matcher: MatchObject(locators=[('AutomationId', '7', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:23.061" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.EditControl object at 0x000001E245C25890&gt;, locator='id:7', name='', automation_id='7', control_type='EditControl', class_name='ThunderRT6TextBox', left=758, right=793, top=246, bottom=265, width=35, height=19, xcenter=775, ycenter=255)</msg>
+<msg timestamp="20231205 15:31:23.063" level="INFO">Sending keys '45' to element: ControlType: EditControl    ClassName: ThunderRT6TextBox    AutomationId: 7    Rect: (758,246,793,265)[35x19]    Name: ''    Handle: 0x1200604(18875908)</msg>
+<status status="PASS" starttime="20231205 15:31:23.007" endtime="20231205 15:31:23.586"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:6</arg>
+<arg>keys=16</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:23.588" level="INFO">Getting element with locator: id:6</msg>
+<msg timestamp="20231205 15:31:23.591" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C37D90&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:23.592" level="INFO">Locator 'id:6' produced matcher: MatchObject(locators=[('AutomationId', '6', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:23.633" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.EditControl object at 0x000001E245C237D0&gt;, locator='id:6', name='', automation_id='6', control_type='EditControl', class_name='ThunderRT6TextBox', left=858, right=905, top=266, bottom=287, width=47, height=21, xcenter=881, ycenter=276)</msg>
+<msg timestamp="20231205 15:31:23.634" level="INFO">Sending keys '16' to element: ControlType: EditControl    ClassName: ThunderRT6TextBox    AutomationId: 6    Rect: (858,266,905,287)[47x21]    Name: ''    Handle: 0x5F0252(6226514)</msg>
+<status status="PASS" starttime="20231205 15:31:23.586" endtime="20231205 15:31:24.158"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${factura}</var>
+<arg>${row["N FACTURA"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:24.161" level="INFO">${factura} = 23318</msg>
+<status status="PASS" starttime="20231205 15:31:24.158" endtime="20231205 15:31:24.161"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:12</arg>
+<arg>${factura}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:24.163" level="INFO">Getting element with locator: id:12</msg>
+<msg timestamp="20231205 15:31:24.166" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C36E50&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:24.167" level="INFO">Locator 'id:12' produced matcher: MatchObject(locators=[('AutomationId', '12', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:24.253" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.EditControl object at 0x000001E245C265D0&gt;, locator='id:12', name='', automation_id='12', control_type='EditControl', class_name='ThunderRT6TextBox', left=958, right=1053, top=266, bottom=287, width=95, height=21, xcenter=1005, ycenter=276)</msg>
+<msg timestamp="20231205 15:31:24.255" level="INFO">Sending keys '23318' to element: ControlType: EditControl    ClassName: ThunderRT6TextBox    AutomationId: 12    Rect: (958,266,1053,287)[95x21]    Name: ''    Handle: 0x5C0248(6029896)</msg>
+<status status="PASS" starttime="20231205 15:31:24.161" endtime="20231205 15:31:24.810"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_actual}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20231205 15:31:24.811" level="INFO">${fecha_actual} = 2023-12-05 15:31:24.811</msg>
+<status status="PASS" starttime="20231205 15:31:24.810" endtime="20231205 15:31:24.811"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${fecha_formateada}</var>
+<arg>${fecha_actual}</arg>
+<arg>%d/%m/%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20231205 15:31:24.813" level="INFO">${fecha_formateada} = 05/12/2023</msg>
+<status status="PASS" starttime="20231205 15:31:24.812" endtime="20231205 15:31:24.813"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>La fecha actual es: ${fecha_formateada}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20231205 15:31:24.814" level="INFO">La fecha actual es: 05/12/2023</msg>
+<status status="PASS" starttime="20231205 15:31:24.814" endtime="20231205 15:31:24.815"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>${fecha_formateada}</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<msg timestamp="20231205 15:31:24.816" level="INFO">Getting element with locator: 05/12/2023</msg>
+<msg timestamp="20231205 15:31:24.819" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C35510&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:24.820" level="INFO">Locator '05/12/2023' produced matcher: MatchObject(locators=[('Name', '05/12/2023', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:24.931" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C25250&gt;, locator='05/12/2023', name='05/12/2023', automation_id='', control_type='PaneControl', class_name='DTPicker20WndClass', left=359, right=454, top=297, bottom=316, width=95, height=19, xcenter=406, ycenter=306)</msg>
+<status status="PASS" starttime="20231205 15:31:24.815" endtime="20231205 15:31:25.495"/>
+</kw>
+<kw name="Split String" library="String">
+<var>@{fecha_parts}</var>
+<arg>${fecha_formateada}</arg>
+<arg>/</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<msg timestamp="20231205 15:31:25.499" level="INFO">@{fecha_parts} = [ 05 | 12 | 2023 ]</msg>
+<status status="PASS" starttime="20231205 15:31:25.497" endtime="20231205 15:31:25.499"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${day}</var>
+<arg>${fecha_parts}[0]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20231205 15:31:25.500" level="INFO">${day} = 5</msg>
+<status status="PASS" starttime="20231205 15:31:25.499" endtime="20231205 15:31:25.501"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${month}</var>
+<arg>${fecha_parts}[1]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20231205 15:31:25.502" level="INFO">${month} = 12</msg>
+<status status="PASS" starttime="20231205 15:31:25.501" endtime="20231205 15:31:25.502"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${year}</var>
+<arg>${fecha_parts}[2]</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20231205 15:31:25.504" level="INFO">${year} = 2023</msg>
+<status status="PASS" starttime="20231205 15:31:25.503" endtime="20231205 15:31:25.504"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${year}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:25.506" level="INFO">Sending keys '2023{RIGHT}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:25.505" endtime="20231205 15:31:26.072"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${day}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:26.074" level="INFO">Sending keys '5{RIGHT}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:26.072" endtime="20231205 15:31:26.606"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${month}{ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:26.608" level="INFO">Sending keys '12{ENTER}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:26.606" endtime="20231205 15:31:27.153"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${day}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:27.155" level="INFO">Sending keys '5{RIGHT}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:27.153" endtime="20231205 15:31:27.688"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${month}{RIGHT}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:27.690" level="INFO">Sending keys '12{RIGHT}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:27.688" endtime="20231205 15:31:28.233"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${year} {RIGHT} {ENTER}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:28.235" level="INFO">Sending keys '2023 {RIGHT} {ENTER}' to element: &lt;module 'uiautomation' from 'c:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\devengadosvenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231205 15:31:28.233" endtime="20231205 15:31:28.841"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${import}</var>
+<arg>${row["IMPORTE"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231205 15:31:28.844" level="INFO">${import} = 2000</msg>
+<status status="PASS" starttime="20231205 15:31:28.841" endtime="20231205 15:31:28.844"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>id:30</arg>
+<arg>keys=${import}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<msg timestamp="20231205 15:31:28.847" level="INFO">Getting element with locator: id:30</msg>
+<msg timestamp="20231205 15:31:28.849" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C34350&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:28.850" level="INFO">Locator 'id:30' produced matcher: MatchObject(locators=[('AutomationId', '30', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:28.951" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.EditControl object at 0x000001E245C37050&gt;, locator='id:30', name='', automation_id='30', control_type='EditControl', class_name='ThunderRT6TextBox', left=379, right=504, top=326, bottom=345, width=125, height=19, xcenter=441, ycenter=335)</msg>
+<msg timestamp="20231205 15:31:28.952" level="INFO">Sending keys '2000' to element: ControlType: EditControl    ClassName: ThunderRT6TextBox    AutomationId: 30    Rect: (379,326,504,345)[125x19]    Name: ''    Handle: 0x6B072E(7014190)</msg>
+<status status="PASS" starttime="20231205 15:31:28.844" endtime="20231205 15:31:29.497"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>datos de comprobante cargados</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20231205 15:31:29.498" level="INFO">datos de comprobante cargados</msg>
+<status status="PASS" starttime="20231205 15:31:29.498" endtime="20231205 15:31:29.499"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:45</arg>
+<arg>timeout=30</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<msg timestamp="20231205 15:31:29.501" level="INFO">Locator timeout set to: 30.000000</msg>
+<msg timestamp="20231205 15:31:29.502" level="INFO">Getting element with locator: id:45</msg>
+<msg timestamp="20231205 15:31:29.504" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E245C36C50&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:29.506" level="INFO">Locator 'id:45' produced matcher: MatchObject(locators=[('AutomationId', '45', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:29.724" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.ButtonControl object at 0x000001E245C37350&gt;, locator='id:45', name='Aceptar', automation_id='45', control_type='ButtonControl', class_name='ThunderRT6CommandButton', left=305, right=375, top=197, bottom=220, width=70, height=23, xcenter=340, ycenter=208)</msg>
+<status status="PASS" starttime="20231205 15:31:29.499" endtime="20231205 15:31:30.291"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20231205 15:31:32.715" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20231205 15:31:31.213" endtime="20231205 15:31:32.715"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elemento_existente}</var>
+<arg>RPA.Windows.Click</arg>
+<arg>locator=id:6</arg>
+<arg>timeout=10</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Click" library="RPA.Windows">
+<arg>locator=id:6</arg>
+<arg>timeout=10</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<msg timestamp="20231205 15:31:32.718" level="INFO">Locator timeout set to: 10.000000</msg>
+<msg timestamp="20231205 15:31:32.719" level="INFO">Getting element with locator: id:6</msg>
+<msg timestamp="20231205 15:31:32.721" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000001E2457A7DD0&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231205 15:31:32.722" level="INFO">Locator 'id:6' produced matcher: MatchObject(locators=[('AutomationId', '6', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231205 15:31:32.762" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.ButtonControl object at 0x000001E245C22B10&gt;, locator='id:6', name='Sí', automation_id='6', control_type='ButtonControl', class_name='Button', left=655, right=730, top=429, bottom=452, width=75, height=23, xcenter=692, ycenter=440)</msg>
+<status status="PASS" starttime="20231205 15:31:32.717" endtime="20231205 15:31:33.321"/>
+</kw>
+<msg timestamp="20231205 15:31:33.323" level="INFO">${elemento_existente} = True</msg>
+<status status="PASS" starttime="20231205 15:31:32.716" endtime="20231205 15:31:33.323"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${elemento_existente}</arg>
+<arg>Log</arg>
+<arg>Se acepto la correlatividad de comprobantes</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>Se acepto la correlatividad de comprobantes</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20231205 15:31:33.325" level="INFO">Se acepto la correlatividad de comprobantes</msg>
+<status status="PASS" starttime="20231205 15:31:33.325" endtime="20231205 15:31:33.326"/>
+</kw>
+<status status="PASS" starttime="20231205 15:31:33.324" endtime="20231205 15:31:33.326"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20231205 15:31:34.828" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20231205 15:31:33.326" endtime="20231205 15:31:34.828"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${elemento_existente2}</var>
+<arg>id:65535</arg>
+<doc>
