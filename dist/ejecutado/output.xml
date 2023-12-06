@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.11.7 on win32)" generated="20231206 14:39:53.819" rpa="true" schemaversion="4">
+<suite id="s1" name="Tasks" source="C:\Users\zcheveste\Desktop\robot_estacionamiento\devengadoestacionamiento\tasks.robot">
+<test id="s1-t1" name="Open Major desktop application and play a app" line="34">
+<kw name="Creacion de Carpetas">
+<kw name="RPA.Excel.Files.Open Workbook">
+<arg>${diccionario}</arg>
+<msg timestamp="20231206 14:44:55.100" level="FAIL">No keyword with name 'RPA.Excel.Files.Open Workbook' found.</msg>
+<status status="FAIL" starttime="20231206 14:44:55.100" endtime="20231206 14:44:55.100"/>
+</kw>
+<kw name="Get Cell Value">
+<var>${descargas}</var>
+<arg>2</arg>
+<arg>B</arg>
+<status status="NOT RUN" starttime="20231206 14:44:55.101" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${fecha_hoy}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${año}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%Y</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${mes}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%m</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${día}</var>
+<arg>${fecha_hoy}</arg>
+<arg>%d</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_año}</var>
+<arg>${descargas}\\${año}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_mes}</var>
+<arg>${ruta_año}\\${mes}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_dia}</var>
+<arg>${ruta_mes}\\${día}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ruta_carpeta}</var>
+<arg>${ruta_dia}\\${nombre_carpeta}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${existe_carpeta_año}</var>
+<arg>Directory Should Exist</arg>
+<arg>${ruta_año}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${existe_carpeta_año}</arg>
+<arg>Create Directory</arg>
+<arg>${ruta_año}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${existe_carpeta_mes}</var>
+<arg>Directory Should Exist</arg>
+<arg>${ruta_mes}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${existe_carpeta_mes}</arg>
+<arg>Create Directory</arg>
+<arg>${ruta_mes}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.102" endtime="20231206 14:44:55.102"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${existe_carpeta_día}</var>
+<arg>Directory Should Exist</arg>
+<arg>${ruta_dia}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.103" endtime="20231206 14:44:55.103"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${existe_carpeta_día}</arg>
+<arg>Create Directory</arg>
+<arg>${ruta_dia}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.103" endtime="20231206 14:44:55.103"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${existe_carpeta_especifica}</var>
+<arg>Directory Should Exist</arg>
+<arg>${ruta_carpeta}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.103" endtime="20231206 14:44:55.103"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${existe_carpeta_especifica}</arg>
+<arg>Create Directory</arg>
+<arg>${ruta_carpeta}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20231206 14:44:55.103" endtime="20231206 14:44:55.103"/>
+</kw>
+<kw name="Close Workbook">
+<status status="NOT RUN" starttime="20231206 14:44:55.104" endtime="20231206 14:44:55.104"/>
+</kw>
+<status status="FAIL" starttime="20231206 14:44:55.098" endtime="20231206 14:44:55.104"/>
+</kw>
+<kw name="Carga de datos">
+<status status="NOT RUN" starttime="20231206 14:44:55.105" endtime="20231206 14:44:55.105"/>
+</kw>
+<status status="FAIL" starttime="20231206 14:44:55.098" endtime="20231206 14:44:55.105">No keyword with name 'RPA.Excel.Files.Open Workbook' found.</status>
+</test>
+<status status="FAIL" starttime="20231206 14:39:53.820" endtime="20231206 14:44:55.105"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20231206 14:39:53.835" level="ERROR">Error in file 'C:\Users\zcheveste\Desktop\robot_estacionamiento\devengadoestacionamiento\tasks.robot' on line 3: Importing library 'RPA.Windows' failed: ModuleNotFoundError: No module named 'RPA'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts\robot.exe
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\python311.zip
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\DLLs
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib\site-packages</msg>
+<msg timestamp="20231206 14:44:55.082" level="ERROR">Error in file 'C:\Users\zcheveste\Desktop\robot_estacionamiento\devengadoestacionamiento\tasks.robot' on line 4: Importing library 'RPA.Excel.Files' failed: ModuleNotFoundError: No module named 'RPA'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts\robot.exe
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\python311.zip
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\DLLs
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib\site-packages</msg>
+<msg timestamp="20231206 14:44:55.084" level="ERROR">Error in file 'C:\Users\zcheveste\Desktop\robot_estacionamiento\devengadoestacionamiento\tasks.robot' on line 5: Importing library 'RPA.Tables' failed: ModuleNotFoundError: No module named 'RPA'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts\robot.exe
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\python311.zip
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\DLLs
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib\site-packages</msg>
+<msg timestamp="20231206 14:44:55.090" level="ERROR">Error in file 'C:\Users\zcheveste\Desktop\robot_estacionamiento\devengadoestacionamiento\tasks.robot' on line 8: Importing library 'RPA.Desktop' failed: ModuleNotFoundError: No module named 'RPA'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts\robot.exe
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\python311.zip
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\DLLs
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib\site-packages</msg>
+<msg timestamp="20231206 14:44:55.097" level="ERROR">Error in file 'C:\Users\zcheveste\Desktop\robot_estacionamiento\devengadoestacionamiento\tasks.robot' on line 10: Importing library 'RPA.Salesforce' failed: ModuleNotFoundError: No module named 'RPA'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts\robot.exe
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\python311.zip
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\DLLs
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0
+  C:\Users\zcheveste\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages
+  C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2032.0_x64__qbz5n2kfra8p0\Lib\site-packages</msg>
+</errors>
+</robot>

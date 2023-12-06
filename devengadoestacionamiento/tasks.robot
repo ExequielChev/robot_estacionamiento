@@ -25,8 +25,8 @@ ${hojadiccionario} =    dicci_hoja
 ${contador}    0
 ${value_to_write} =    OK
 ${value_to_write1} =    SI EXISTE
-${column_name1} =    Q
-${column_name2} =    R
+${column_name1} =    R
+${column_name2} =    S
 ${texto_del_cartel}=    existe
 ${nombre_carpeta} =    DevengadosPdfEstacionamiento
 
@@ -122,8 +122,8 @@ Carga de datos
     #Crear columnas
     ${contadorROW2}    Set Variable    2  
     #En la columna P se encuentra "COMPROMISOS"
-    Set Cell Value    1    Q    COMPROBANTES
-    Set Cell Value    1    R    DEVENGADOS
+    Set Cell Value    1    R    COMPROBANTES
+    Set Cell Value    1    S    DEVENGADOS
 
     ${data_as_table} =    Read Worksheet As Table    ${factura_hoja}    header=True
 
@@ -138,7 +138,16 @@ Carga de datos
     ${numero_cuenta} =    Set Variable    ${row2["Numero_cuenta"]}
 
     FOR    ${row}    IN    @{data_as_table}
+
+        ${factura1}    Set Variable    ${row["TIPO FACTURA"]}
+        ${factura1}    Convert To Integer    ${factura1}
+        ${celdavacia}    Get Cell Value    ${factura1}    K
+
+
+        IF    '${celdavacia}' != 'null'
+
         ${numeroc1} =    Set Variable    ${row["NUMERO"]}
+
         IF    ${numero_cuenta}==${numeroc1}
         
         ${estado} =    Set Variable    ${row['COMPROBANTES']}
@@ -183,11 +192,11 @@ Carga de datos
                     Send Keys    id:7    keys=${tipofb}
 
                     #Cargar Punto venta
-                    #CONSEGUIR PUNTO DE VENTA
-                    Send Keys    id:6    keys=
+                    ${puntoventa}    Set Variable    ${row["PUNTO DE VENTA"]}
+                    Send Keys    id:6    ${puntoventa}
 
                     #cargar el numero de la Factura
-                    ${factura}    Set Variable    ${row["N FACTURA"]}
+                    ${factura}    Set Variable    ${row["factura"]}
                     Send Keys    id:12    ${factura}
 
                     #Conseguir la fecha actual y ordenarla de manera eficiente para continuar con la carga
@@ -215,7 +224,7 @@ Carga de datos
                     Send Keys    keys=${year} {RIGHT} {ENTER}
 
                     #Cargar Importe de la factura        
-                    ${import}    Set Variable    ${row["IMPORTE"]}
+                    ${import}    Set Variable    ${row["IMPORTE FACTURA"]}
                     Send Keys    id:30    keys=${import}
                     Log    datos de comprobante cargados
 
@@ -413,6 +422,7 @@ Carga de datos
                         Sleep    3s
                         END  
                         END    
+                        END
                         END
 
      Close Workbook
