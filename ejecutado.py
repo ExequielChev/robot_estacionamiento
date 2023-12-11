@@ -68,25 +68,21 @@ def redimensionar_imagen(ruta_imagen, nuevo_ancho, nuevo_alto):
     imagen_redimensionada = imagen.resize((nuevo_ancho, nuevo_alto))
     return ImageTk.PhotoImage(imagen_redimensionada)
 
-def toggle_modo_oscuro(estilo, toggle_var):
-    # Cambia los colores entre claro y oscuro
-    modo_oscuro = toggle_var.get()
-
-    if modo_oscuro:
-        # Colores oscuros
-        estilo.configure("TLabel", foreground="white", background="#333")
-        estilo.configure("TButton", foreground="white", background="#555")
-        estilo.configure("TFrame", foreground="white", background="#333")
-    else:
-        # Colores claros
-        estilo.configure("TLabel", foreground="black", background="white")
-        estilo.configure("TButton", foreground="black", background="#ddd")
-        estilo.configure("TFrame",foreground="black", background="black")
 
 def crear_interfaz(scripts_disponibles):
+
+    
     # Crear la ventana principal
     ventana = tk.Tk()
     ventana.title("Ejecución de Script")
+     # Establecer el tamaño de la ventana
+    largo = 800
+    ancho = 600
+    ventana.geometry(f"{largo}x{ancho}")
+
+    ruta_icono = "C:/Users/zcheveste/Desktop/robot_estacionamiento/bot.ico"  # Reemplaza con la ruta correcta de tu ícono
+    if os.path.exists(ruta_icono):
+        ventana.iconbitmap(ruta_icono)
 
     # Configurar la imagen de fondo
     ruta_imagen = "C:/Users/zcheveste/Documents/Robocop_project/prueba/static/muni.png"
@@ -95,63 +91,70 @@ def crear_interfaz(scripts_disponibles):
     fondo_imagen = redimensionar_imagen(ruta_imagen, nueva_ancho, nueva_alto)
     
     # Etiqueta para la imagen de fondo (como logotipo)
-    logo_label = tk.Label(ventana, image=fondo_imagen)
-    logo_label.pack()
+
+
 
     # Lista de scripts
-    lista_scripts = tk.Listbox(ventana, selectmode=tk.SINGLE, font=('Arial', 12))
-    for script in scripts_disponibles:
-        lista_scripts.insert(tk.END, script)
-    lista_scripts.pack(pady=10)
+    combobox_scripts = ttk.Combobox(ventana, values=list(scripts_disponibles.keys()), font=('Arial', 12))
+    combobox_scripts.pack(pady=10)
+    # for script in scripts_disponibles:
+    #     lista_scripts.insert(tk.END, script)
+    # lista_scripts.pack(pady=10)
 
+    
     # Etiqueta para el aviso de ejecución
     aviso_label = tk.Label(ventana, text="", fg="blue")
     aviso_label.pack()
+
+    logo_label = tk.Label(ventana, image=fondo_imagen)
+    logo_label.pack()
 
     # Botón de ejecución
     # boton_ejecutar = ttk.Button(ventana, text="Ejecutar Script Seleccionado", command=lambda: ejecutar_script_seleccionado(lista_scripts, aviso_label, scripts_disponibles))
     # boton_ejecutar.pack(pady=20)
 
-    # Función para cambiar entre los modos claro y oscuro
-    # def toggle_modo_oscuro_wrapper():
-    #     toggle_modo_oscuro(estilo, toggle_var)
 
-    #    # Variable para el botón de alternar
-    # toggle_var = tk.BooleanVar(value=False)
+       # Variable para el botón de alternar
 
     # Variable para la cancelación de la ejecución
     cancelar_var = tk.BooleanVar(value=False)
 
-    boton_ejecutar = ttk.Button(ventana, text="Ejecutar Script Seleccionado", command=lambda: ejecutar_script_seleccionado(lista_scripts, aviso_label, scripts_disponibles, cancelar_var))
+    boton_ejecutar = ttk.Button(ventana, text="Ejecutar Script Seleccionado", command=lambda: ejecutar_script_seleccionado(combobox_scripts, aviso_label, scripts_disponibles, cancelar_var))
+
     boton_ejecutar.pack(pady=20)
-    boton_cancelar = ttk.Button(ventana, text="Cancelar Ejecución", command=lambda: cancelar_ejecucion(cancelar_var))
-    boton_cancelar.pack(pady=10)
+
     
     # Crear un botón de alternar
     # boton_toggle = ttk.Checkbutton(ventana, text="Modo Oscuro", variable=toggle_var, command=toggle_modo_oscuro_wrapper)
     # boton_toggle.pack(pady=10)
  
+    ventana.configure(bg="Lightblue")  # Fondo oscuro
+    logo_label.config(bg="Lightblue")   # Fondo oscuro para la etiqueta del logotipo
+    aviso_label.config(bg="Lightblue")  # Fondo oscuro para la etiqueta de aviso
+    # Fondo oscuro
 
     # Crear y configurar el estilo
-    estilo = ttk.Style()
+    style = ttk.Style()
 
-    # Aplicar el estilo inicial
-    # toggle_modo_oscuro(estilo, toggle_var)
+    # Utiliza el tema personalizado
+    style.theme_use("clam")
+
 
     ventana.mainloop()
     
 # Función para ejecutar el script seleccionado
-def ejecutar_script_seleccionado(lista_scripts, aviso_label, scripts_disponibles, cancelar_var):
+def ejecutar_script_seleccionado(combobox_scripts, aviso_label, scripts_disponibles, cancelar_var):
     cancelar_var.set(False)
-    script_seleccionado = lista_scripts.get(tk.ACTIVE)
+    script_seleccionado = combobox_scripts.get()
     ejecutar_script(script_seleccionado, aviso_label, scripts_disponibles, cancelar_var)
 
 # Lista de scripts disponibles
 scripts_disponibles = {
-    "Robot Compromiso": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\compromisoestacionamiento\\tasks.robot",
-    "Ocr Comprobantes": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\Captura_compr.py",
-    "Robot Devengados": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\tasks.robot"
+        "Robot Compromiso": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\compromisoestacionamiento\\ejecutacomproest.py",
+        "Ocr Comprobantes": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\Captura_compr.py",
+        "Robot Devengados": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\ejecutadevest.py",
 }
 
 # Ejecutar la creación de la interfaz
 crear_interfaz(scripts_disponibles)
+

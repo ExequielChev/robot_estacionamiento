@@ -1,215 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1.1 (Python 3.11.7 on win32)" generated="20231206 14:26:17.634" rpa="true" schemaversion="4">
+<robot generator="Robot 6.1.1 (Python 3.11.7 on win32)" generated="20231211 12:51:49.794" rpa="true" schemaversion="4">
 <suite id="s1" name="Tasks" source="C:\Users\zcheveste\Desktop\robot_estacionamiento\compromisoestacionamiento\tasks.robot">
 <test id="s1-t1" name="Open Major desktop application and play a app" line="22">
-<kw name="Creacion de Carpetas">
+<kw name="Open the Major.Exe desktop application">
 <kw name="Open Workbook" library="RPA.Excel.Files">
 <arg>${diccionario}</arg>
 <doc>Open an existing Excel workbook.</doc>
-<msg timestamp="20231206 14:26:18.177" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x0000021746F5C6D0&gt;</msg>
-<status status="PASS" starttime="20231206 14:26:18.172" endtime="20231206 14:26:18.177"/>
+<msg timestamp="20231211 12:51:51.012" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x000002336CB5BE90&gt;</msg>
+<status status="PASS" starttime="20231211 12:51:51.004" endtime="20231211 12:51:51.012"/>
 </kw>
 <kw name="Get Cell Value" library="RPA.Excel.Files">
-<var>${descargas}</var>
-<arg>2</arg>
+<var>${usuario}</var>
+<arg>5</arg>
 <arg>B</arg>
 <doc>Get a cell value in the given worksheet.</doc>
-<msg timestamp="20231206 14:26:18.178" level="INFO">${descargas} = C:\\Users\\zcheveste\\Documents</msg>
-<status status="PASS" starttime="20231206 14:26:18.177" endtime="20231206 14:26:18.178"/>
+<msg timestamp="20231211 12:51:51.014" level="INFO">${usuario} = KTURKI</msg>
+<status status="PASS" starttime="20231211 12:51:51.012" endtime="20231211 12:51:51.014"/>
 </kw>
-<kw name="Get Current Date" library="DateTime">
-<var>${fecha_hoy}</var>
-<doc>Returns current local or UTC time with an optional increment.</doc>
-<msg timestamp="20231206 14:26:18.178" level="INFO">${fecha_hoy} = 2023-12-06 14:26:18.178</msg>
-<status status="PASS" starttime="20231206 14:26:18.178" endtime="20231206 14:26:18.178"/>
+<kw name="Get Cell Value" library="RPA.Excel.Files">
+<var>${contraseña}</var>
+<arg>6</arg>
+<arg>B</arg>
+<doc>Get a cell value in the given worksheet.</doc>
+<msg timestamp="20231211 12:51:51.014" level="INFO">${contraseña} = 37792827</msg>
+<status status="PASS" starttime="20231211 12:51:51.014" endtime="20231211 12:51:51.014"/>
 </kw>
-<kw name="Convert Date" library="DateTime">
-<var>${año}</var>
-<arg>${fecha_hoy}</arg>
-<arg>%Y</arg>
-<doc>Converts between supported `date formats`.</doc>
-<msg timestamp="20231206 14:26:18.180" level="INFO">${año} = 2023</msg>
-<status status="PASS" starttime="20231206 14:26:18.178" endtime="20231206 14:26:18.180"/>
-</kw>
-<kw name="Convert Date" library="DateTime">
-<var>${mes}</var>
-<arg>${fecha_hoy}</arg>
-<arg>%m</arg>
-<doc>Converts between supported `date formats`.</doc>
-<msg timestamp="20231206 14:26:18.180" level="INFO">${mes} = 12</msg>
-<status status="PASS" starttime="20231206 14:26:18.180" endtime="20231206 14:26:18.180"/>
-</kw>
-<kw name="Convert Date" library="DateTime">
-<var>${día}</var>
-<arg>${fecha_hoy}</arg>
-<arg>%d</arg>
-<doc>Converts between supported `date formats`.</doc>
-<msg timestamp="20231206 14:26:18.180" level="INFO">${día} = 06</msg>
-<status status="PASS" starttime="20231206 14:26:18.180" endtime="20231206 14:26:18.180"/>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${ruta_año}</var>
-<arg>${descargas}\\${año}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20231206 14:26:18.181" level="INFO">${ruta_año} = C:\\Users\\zcheveste\\Documents\2023</msg>
-<status status="PASS" starttime="20231206 14:26:18.180" endtime="20231206 14:26:18.181"/>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${ruta_mes}</var>
-<arg>${ruta_año}\\${mes}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20231206 14:26:18.181" level="INFO">${ruta_mes} = C:\\Users\\zcheveste\\Documents\2023\12</msg>
-<status status="PASS" starttime="20231206 14:26:18.181" endtime="20231206 14:26:18.181"/>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${ruta_dia}</var>
-<arg>${ruta_mes}\\${día}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20231206 14:26:18.181" level="INFO">${ruta_dia} = C:\\Users\\zcheveste\\Documents\2023\12\06</msg>
-<status status="PASS" starttime="20231206 14:26:18.181" endtime="20231206 14:26:18.181"/>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<var>${ruta_carpeta}</var>
-<arg>${ruta_dia}\\${nombre_carpeta}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20231206 14:26:18.181" level="INFO">${ruta_carpeta} = C:\\Users\\zcheveste\\Documents\2023\12\06\Compromisos_PdfEstacionamiento</msg>
-<status status="PASS" starttime="20231206 14:26:18.181" endtime="20231206 14:26:18.181"/>
-</kw>
-<kw name="Run Keyword And Return Status" library="BuiltIn">
-<var>${existe_carpeta_año}</var>
-<arg>Directory Should Exist</arg>
-<arg>${ruta_año}</arg>
-<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<kw name="Directory Should Exist" library="OperatingSystem">
-<arg>${ruta_año}</arg>
-<doc>Fails unless the given path points to an existing directory.</doc>
-<msg timestamp="20231206 14:26:18.182" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\zcheveste\Documents\2023"&gt;C:\Users\zcheveste\Documents\2023&lt;/a&gt;' exists.</msg>
-<status status="PASS" starttime="20231206 14:26:18.181" endtime="20231206 14:26:18.182"/>
-</kw>
-<msg timestamp="20231206 14:26:18.182" level="INFO">${existe_carpeta_año} = True</msg>
-<status status="PASS" starttime="20231206 14:26:18.181" endtime="20231206 14:26:18.182"/>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<arg>not ${existe_carpeta_año}</arg>
-<arg>Create Directory</arg>
-<arg>${ruta_año}</arg>
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" starttime="20231206 14:26:18.182" endtime="20231206 14:26:18.182"/>
-</kw>
-<kw name="Run Keyword And Return Status" library="BuiltIn">
-<var>${existe_carpeta_mes}</var>
-<arg>Directory Should Exist</arg>
-<arg>${ruta_mes}</arg>
-<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<kw name="Directory Should Exist" library="OperatingSystem">
-<arg>${ruta_mes}</arg>
-<doc>Fails unless the given path points to an existing directory.</doc>
-<msg timestamp="20231206 14:26:18.182" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\zcheveste\Documents\2023\12"&gt;C:\Users\zcheveste\Documents\2023\12&lt;/a&gt;' exists.</msg>
-<status status="PASS" starttime="20231206 14:26:18.182" endtime="20231206 14:26:18.182"/>
-</kw>
-<msg timestamp="20231206 14:26:18.182" level="INFO">${existe_carpeta_mes} = True</msg>
-<status status="PASS" starttime="20231206 14:26:18.182" endtime="20231206 14:26:18.182"/>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<arg>not ${existe_carpeta_mes}</arg>
-<arg>Create Directory</arg>
-<arg>${ruta_mes}</arg>
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" starttime="20231206 14:26:18.182" endtime="20231206 14:26:18.182"/>
-</kw>
-<kw name="Run Keyword And Return Status" library="BuiltIn">
-<var>${existe_carpeta_día}</var>
-<arg>Directory Should Exist</arg>
-<arg>${ruta_dia}</arg>
-<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<kw name="Directory Should Exist" library="OperatingSystem">
-<arg>${ruta_dia}</arg>
-<doc>Fails unless the given path points to an existing directory.</doc>
-<msg timestamp="20231206 14:26:18.183" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\zcheveste\Documents\2023\12\06"&gt;C:\Users\zcheveste\Documents\2023\12\06&lt;/a&gt;' exists.</msg>
-<status status="PASS" starttime="20231206 14:26:18.183" endtime="20231206 14:26:18.183"/>
-</kw>
-<msg timestamp="20231206 14:26:18.183" level="INFO">${existe_carpeta_día} = True</msg>
-<status status="PASS" starttime="20231206 14:26:18.182" endtime="20231206 14:26:18.183"/>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<arg>not ${existe_carpeta_día}</arg>
-<arg>Create Directory</arg>
-<arg>${ruta_dia}</arg>
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" starttime="20231206 14:26:18.183" endtime="20231206 14:26:18.183"/>
-</kw>
-<kw name="Run Keyword And Return Status" library="BuiltIn">
-<var>${existe_carpeta_especifica}</var>
-<arg>Directory Should Exist</arg>
-<arg>${ruta_carpeta}</arg>
-<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<kw name="Directory Should Exist" library="OperatingSystem">
-<arg>${ruta_carpeta}</arg>
-<doc>Fails unless the given path points to an existing directory.</doc>
-<msg timestamp="20231206 14:26:18.183" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\zcheveste\Documents\2023\12\06\Compromisos_PdfEstacionamiento"&gt;C:\Users\zcheveste\Documents\2023\12\06\Compromisos_PdfEstacionamiento&lt;/a&gt;' exists.</msg>
-<status status="PASS" starttime="20231206 14:26:18.183" endtime="20231206 14:26:18.183"/>
-</kw>
-<msg timestamp="20231206 14:26:18.183" level="INFO">${existe_carpeta_especifica} = True</msg>
-<status status="PASS" starttime="20231206 14:26:18.183" endtime="20231206 14:26:18.183"/>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<arg>not ${existe_carpeta_especifica}</arg>
-<arg>Create Directory</arg>
-<arg>${ruta_carpeta}</arg>
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" starttime="20231206 14:26:18.183" endtime="20231206 14:26:18.183"/>
-</kw>
-<status status="PASS" starttime="20231206 14:26:18.172" endtime="20231206 14:26:18.184"/>
-</kw>
-<kw name="Ir a incio de usuario">
-<kw name="Click" library="RPA.Windows">
-<arg>name:Transacciones</arg>
-<arg>timeout=60</arg>
-<tag>action</tag>
-<tag>mouse</tag>
-<doc>Mouse click on element matching given locator.</doc>
-<msg timestamp="20231206 14:26:18.184" level="INFO">Locator timeout set to: 60.000000</msg>
-<msg timestamp="20231206 14:26:18.184" level="INFO">Getting element with locator: name:Transacciones</msg>
-<msg timestamp="20231206 14:26:18.283" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x0000021746F5D090&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
-<msg timestamp="20231206 14:26:18.284" level="INFO">Locator 'name:Transacciones' produced matcher: MatchObject(locators=[('Name', 'Transacciones', 0)], _classes=set(), max_level=0)</msg>
-<msg timestamp="20231206 14:26:28.699" level="INFO">Returning element: WindowsElement(item=&lt;uiautomation.uiautomation.MenuItemControl object at 0x0000021746F5CAD0&gt;, locator='name:Transacciones', name='Transacciones', automation_id='', control_type='MenuItemControl', class_name='', left=-31846, right=-31759, top=-31974, bottom=-31955, width=87, height=19, xcenter=-31803, ycenter=-31965)</msg>
-<status status="PASS" starttime="20231206 14:26:18.184" endtime="20231206 14:26:29.257"/>
-</kw>
-<kw name="Click" library="RPA.Windows">
-<arg>name:Compromiso</arg>
-<arg>timeout=30</arg>
-<tag>action</tag>
-<tag>mouse</tag>
-<doc>Mouse click on element matching given locator.</doc>
-<msg timestamp="20231206 14:26:29.259" level="INFO">Locator timeout set to: 30.000000</msg>
-<msg timestamp="20231206 14:26:29.259" level="INFO">Getting element with locator: name:Compromiso</msg>
-<msg timestamp="20231206 14:26:29.263" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x0000021746F9AE10&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
-<msg timestamp="20231206 14:26:29.263" level="INFO">Locator 'name:Compromiso' produced matcher: MatchObject(locators=[('Name', 'Compromiso', 0)], _classes=set(), max_level=0)</msg>
-<msg timestamp="20231206 14:26:59.862" level="INFO">2023-12-06 14:26:59.861 locators.py[274] _get_control_from_params -&gt; Find Control Timeout(30.0s): {Name: 'Compromiso'}</msg>
-<msg timestamp="20231206 14:26:59.862" level="FAIL">ElementNotFound: Element not found with locator 'name:Compromiso'</msg>
-<status status="FAIL" starttime="20231206 14:26:29.259" endtime="20231206 14:26:59.931"/>
-</kw>
-<kw name="Click" library="RPA.Windows">
-<arg>id:89</arg>
-<arg>timeout=30</arg>
-<tag>action</tag>
-<tag>mouse</tag>
-<doc>Mouse click on element matching given locator.</doc>
-<status status="NOT RUN" starttime="20231206 14:26:59.932" endtime="20231206 14:26:59.932"/>
+<kw name="Windows Run" library="RPA.Windows">
+<arg>Major.Exe</arg>
+<tag>window</tag>
+<doc>Use Windows Run window to launch an application.</doc>
+<msg timestamp="20231211 12:51:51.014" level="INFO">Sending keys '{Win}r' to element: &lt;module 'uiautomation' from 'C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\compromisoestacionamiento\\estacionamientovenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<msg timestamp="20231211 12:51:51.557" level="INFO">Sending keys 'Major.Exe' to element: &lt;module 'uiautomation' from 'C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\compromisoestacionamiento\\estacionamientovenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<msg timestamp="20231211 12:51:52.154" level="INFO">Sending keys '{Enter}' to element: &lt;module 'uiautomation' from 'C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\compromisoestacionamiento\\estacionamientovenv\\Lib\\site-packages\\uiautomation\\__init__.py'&gt;</msg>
+<status status="PASS" starttime="20231211 12:51:51.014" endtime="20231211 12:51:55.676"/>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <arg>5s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" starttime="20231206 14:26:59.932" endtime="20231206 14:26:59.932"/>
+<msg timestamp="20231211 12:52:00.676" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20231211 12:51:55.676" endtime="20231211 12:52:00.676"/>
 </kw>
-<status status="FAIL" starttime="20231206 14:26:18.184" endtime="20231206 14:26:59.932"/>
+<kw name="Click" library="RPA.Windows">
+<arg>id:25</arg>
+<arg>timeout=60</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<msg timestamp="20231211 12:52:00.676" level="INFO">Locator timeout set to: 60.000000</msg>
+<msg timestamp="20231211 12:52:00.676" level="INFO">Getting element with locator: id:25</msg>
+<msg timestamp="20231211 12:52:00.794" level="INFO">Resulted root element: WindowsElement(item=&lt;uiautomation.uiautomation.PaneControl object at 0x000002336CB48750&gt;, locator=None, name='Escritorio 1', automation_id='', control_type='PaneControl', class_name='#32769', left=0, right=1366, top=0, bottom=768, width=1366, height=768, xcenter=683, ycenter=384)</msg>
+<msg timestamp="20231211 12:52:00.794" level="INFO">Locator 'id:25' produced matcher: MatchObject(locators=[('AutomationId', '25', 0)], _classes=set(), max_level=0)</msg>
+<msg timestamp="20231211 12:53:00.978" level="INFO">2023-12-11 12:53:00.977 locators.py[274] _get_control_from_params -&gt; Find Control Timeout(60.0s): {AutomationId: '25'}</msg>
+<msg timestamp="20231211 12:53:00.978" level="FAIL">ElementNotFound: Element not found with locator 'id:25'</msg>
+<status status="FAIL" starttime="20231211 12:52:00.676" endtime="20231211 12:53:00.982"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>40s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20231211 12:53:00.983" endtime="20231211 12:53:00.983"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:6</arg>
+<arg>timeout=120</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231211 12:53:00.983" endtime="20231211 12:53:00.983"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${usuario}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231211 12:53:00.983" endtime="20231211 12:53:00.983"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:5</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231211 12:53:00.983" endtime="20231211 12:53:00.983"/>
+</kw>
+<kw name="Send Keys" library="RPA.Windows">
+<arg>keys=${contraseña}</arg>
+<tag>action</tag>
+<tag>keyboard</tag>
+<doc>Send keys to desktop, current window or to Control element
+defined by given locator.</doc>
+<status status="NOT RUN" starttime="20231211 12:53:00.983" endtime="20231211 12:53:00.983"/>
+</kw>
+<kw name="Click" library="RPA.Windows">
+<arg>id:4</arg>
+<tag>action</tag>
+<tag>mouse</tag>
+<doc>Mouse click on element matching given locator.</doc>
+<status status="NOT RUN" starttime="20231211 12:53:00.983" endtime="20231211 12:53:00.983"/>
+</kw>
+<status status="FAIL" starttime="20231211 12:51:51.004" endtime="20231211 12:53:00.984"/>
+</kw>
+<kw name="Creacion de Carpetas">
+<status status="NOT RUN" starttime="20231211 12:53:00.984" endtime="20231211 12:53:00.984"/>
+</kw>
+<kw name="Ir a incio de usuario">
+<status status="NOT RUN" starttime="20231211 12:53:00.984" endtime="20231211 12:53:00.984"/>
 </kw>
 <kw name="Carga de datos">
-<status status="NOT RUN" starttime="20231206 14:26:59.932" endtime="20231206 14:26:59.932"/>
+<status status="NOT RUN" starttime="20231211 12:53:00.984" endtime="20231211 12:53:00.984"/>
 </kw>
-<status status="FAIL" starttime="20231206 14:26:18.172" endtime="20231206 14:26:59.932">ElementNotFound: Element not found with locator 'name:Compromiso'</status>
+<status status="FAIL" starttime="20231211 12:51:51.004" endtime="20231211 12:53:00.984">ElementNotFound: Element not found with locator 'id:25'</status>
 </test>
-<status status="FAIL" starttime="20231206 14:26:17.635" endtime="20231206 14:26:59.933"/>
+<status status="FAIL" starttime="20231211 12:51:49.796" endtime="20231211 12:53:00.984"/>
 </suite>
 <statistics>
 <total>

@@ -8,9 +8,7 @@ Library    DateTime
 Library    RPA.Desktop
 Library    OperatingSystem
 Library    RPA.Salesforce
-# Library    openpyxl
-# Library    Collections
-# Library    RPA.FTP
+
 
 
 
@@ -32,7 +30,7 @@ ${nombre_carpeta} =    DevengadosPdfEstacionamiento
 
 *** Tasks ***
 Open Major desktop application and play a app
-    #Open the Major.Exe desktop application 
+    Open the Major.Exe desktop application 
     Creacion de Carpetas
     Carga de datos
 
@@ -139,6 +137,7 @@ Carga de datos
 
     FOR    ${row}    IN    @{data_as_table}
 
+        RPA.Excel.Files.Open Workbook    ${excel_factura}
         ${factura1}    Set Variable    ${row["TIPO FACTURA"]}
         ${factura1}    Convert To Integer    ${factura1}
         ${celdavacia}    Get Cell Value    ${factura1}    K
@@ -188,7 +187,7 @@ Carga de datos
                     Send Keys    keys={DELETE}
 
                     #Carga el tipo de Factura
-                    ${tipofb}    Set Variable    ${row["TIPO FC"]}
+                    ${tipofb}    Set Variable    ${row["TIPO FACTURA"]}
                     Send Keys    id:7    keys=${tipofb}
 
                     #Cargar Punto venta
