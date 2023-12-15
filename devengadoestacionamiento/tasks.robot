@@ -30,7 +30,7 @@ ${nombre_carpeta} =    DevengadosPdfEstacionamiento
 
 *** Tasks ***
 Open Major desktop application and play a app
-    Open the Major.Exe desktop application 
+    #Open the Major.Exe desktop application 
     Creacion de Carpetas
     Carga de datos
 
@@ -166,7 +166,7 @@ Carga de datos
                     RPA.Windows.Click    name:Comprobantes    timeout=30
 
                     #Seleccionar ventana de nuevo comprobante
-                    RPA.Windows.Click    id:43    timeout=10
+                    RPA.Windows.Click    id:43    timeout=60
                     Sleep    0.5s
                     
                     #cargar proveedor tipo 
@@ -226,6 +226,9 @@ Carga de datos
                     ${import}    Set Variable    ${row["IMPORTE FACTURA"]}
                     Send Keys    id:30    keys=${import}
                     Log    datos de comprobante cargados
+                    
+                    #Clickear en proveedor con retenciones
+                    Run Keyword And Ignore Error    RPA.Windows.Click    id:2    timeout=30
 
                     #Apretar click en la ventana de Aceptar
                     RPA.Windows.Click    id:45    timeout=30
@@ -425,3 +428,4 @@ Carga de datos
                         END
 
      Close Workbook
+

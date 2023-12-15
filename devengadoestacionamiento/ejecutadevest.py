@@ -1,15 +1,15 @@
+import os
 import subprocess
+
+BASE_DIR = os.path.join(os.getcwd(), 'devengadoestacionamiento', 'tasks.robot')
+
 
 def ejecutar_script(nombre_script):
     subprocess.run(nombre_script, shell=True)
 
 if __name__ == "__main__":
     # Scripts a ejecutar
-    scripts = [
+    scripts = (f'robot {BASE_DIR}')
 
-        "robot C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\tasks.robot",
-
-    ]
-
-    # Ejecutar el primer script normalmente (OCR CARGA DE FACTURAS)
-    ejecutar_script(scripts[0])
+    # Ejecutar el primer script normalmente carga devengados
+    ejecutar_script(scripts)

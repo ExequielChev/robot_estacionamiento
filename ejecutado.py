@@ -2,7 +2,12 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import subprocess
 import os
-from PIL import Image, ImageTk
+from PIL import Image
+from PIL import ImageTk
+
+
+BASE_PATH = os.path.join(os.getcwd())
+
 
 def ejecutar_script(script_seleccionado, aviso_label, scripts_disponibles, cancelar_var):
     try:
@@ -76,16 +81,16 @@ def crear_interfaz(scripts_disponibles):
     ventana = tk.Tk()
     ventana.title("Ejecución de Script")
      # Establecer el tamaño de la ventana
-    largo = 800
-    ancho = 600
+    largo = 400
+    ancho = 350
     ventana.geometry(f"{largo}x{ancho}")
 
-    ruta_icono = "C:/Users/zcheveste/Desktop/robot_estacionamiento/bot.ico"  # Reemplaza con la ruta correcta de tu ícono
+    ruta_icono = os.path.join(BASE_PATH, "bot.ico")  # Reemplaza con la ruta correcta de tu ícono
     if os.path.exists(ruta_icono):
         ventana.iconbitmap(ruta_icono)
 
     # Configurar la imagen de fondo
-    ruta_imagen = "C:/Users/zcheveste/Documents/Robocop_project/prueba/static/muni.png"
+    ruta_imagen = os.path.join(BASE_PATH, "muni.png")
     nueva_ancho = 220  # Ajusta según tus necesidades
     nueva_alto = 200   # Ajusta según tus necesidades
     fondo_imagen = redimensionar_imagen(ruta_imagen, nueva_ancho, nueva_alto)
@@ -96,6 +101,7 @@ def crear_interfaz(scripts_disponibles):
 
     # Lista de scripts
     combobox_scripts = ttk.Combobox(ventana, values=list(scripts_disponibles.keys()), font=('Arial', 12))
+    combobox_scripts.set("Seleccione robot")
     combobox_scripts.pack(pady=10)
     # for script in scripts_disponibles:
     #     lista_scripts.insert(tk.END, script)
@@ -123,10 +129,6 @@ def crear_interfaz(scripts_disponibles):
 
     boton_ejecutar.pack(pady=20)
 
-    
-    # Crear un botón de alternar
-    # boton_toggle = ttk.Checkbutton(ventana, text="Modo Oscuro", variable=toggle_var, command=toggle_modo_oscuro_wrapper)
-    # boton_toggle.pack(pady=10)
  
     ventana.configure(bg="Lightblue")  # Fondo oscuro
     logo_label.config(bg="Lightblue")   # Fondo oscuro para la etiqueta del logotipo
@@ -150,11 +152,11 @@ def ejecutar_script_seleccionado(combobox_scripts, aviso_label, scripts_disponib
 
 # Lista de scripts disponibles
 scripts_disponibles = {
-        "Robot Compromiso": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\compromisoestacionamiento\\ejecutacomproest.py",
-        "Ocr Comprobantes": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\Captura_compr.py",
-        "Robot Devengados": "C:\\Users\\zcheveste\\Desktop\\robot_estacionamiento\\devengadoestacionamiento\\ejecutadevest.py",
+    "Iniciar Major": os.path.join(BASE_PATH, "Iniciar", "inicio.py"),
+    "Robot Compromiso": os.path.join(BASE_PATH, "compromisoestacionamiento", "ejecutacomproest.py"),
+    "Ocr Comprobantes": os.path.join(BASE_PATH, "Captura_compr.py"),
+    "Robot Devengados": os.path.join(BASE_PATH, "devengadoestacionamiento", "ejecutadevest.py"),
 }
 
 # Ejecutar la creación de la interfaz
 crear_interfaz(scripts_disponibles)
-
